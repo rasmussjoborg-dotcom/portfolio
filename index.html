@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RS — AI Speed. Human Taste.</title>
+    <meta name="description"
+        content="Portfolio of Rasmus Sjöborg, a Head of Design and Product Strategist helping organizations build scalable systems and high-performing teams.">
+    <!-- SEO & Social -->
+    <link rel="canonical" href="https://portfolio-rsjo-projects.vercel.app/">
+    <meta property="og:title" content="Rasmus Sjöborg — AI Speed. Human Taste.">
+    <meta property="og:description"
+        content="Portfolio of Rasmus Sjöborg, a Head of Design and Product Strategist helping organizations build scalable systems and high-performing teams.">
+    <meta property="og:url" content="https://portfolio-rsjo-projects.vercel.app/">
+    <meta property="og:type" content="website">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Rasmus Sjöborg",
+      "url": "https://portfolio-rsjo-projects.vercel.app/",
+      "jobTitle": "Head of Design & Product Strategist",
+      "sameAs": [
+        "https://www.linkedin.com/in/rasmussjoborg/"
+      ]
+    }
+    </script>
+
+    <!-- Favicon: 💣 -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💣</text></svg>">
+
+    <!-- Design System: Modern Technical (Vercel/Raycast) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=17">
+</head>
+
+<body>
+    <div class="noise-overlay"></div>
+
+    <!-- Audio Progress Bar -->
+    <div class="audio-progress-container">
+        <div class="audio-progress-bar" id="audioProgressBar"></div>
+    </div>
+
+    <!-- Sticky Contact Button (appears on scroll) -->
+    <button class="sticky-contact-btn" id="stickyContactBtn">
+        Contact me
+    </button>
+
+
+
+    <!-- Global Background Layer (Spans Hero + Info) -->
+    <div class="site-background">
+        <canvas id="hero-canvas"></canvas>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <h1 class="hero-title reveal-text">
+                AI speed. Human taste.
+            </h1>
+            <p class="hero-subtitle reveal-text-delayed">
+                <strong class="animated-title">
+                    Hello, I'm a Design
+                    <span class="rotator-window">
+                        <span class="rotator-track">
+                            <span>Creator</span>
+                            <span>Curator</span>
+                            <span>Innovator</span>
+                            <span>Generator</span>
+                            <span>Creator</span>
+                        </span>
+                    </span>
+                </strong><br>
+                I define direction, build systems, and scale delivery through <strong
+                    style="color: var(--text-main);">deep design experience—amplified by AI workflows</strong>.
+                Background
+                across
+                agencies and product orgs—now focused on direction and scale.
+            </p>
+
+            <!-- Audio Player Pill -->
+            <div class="audio-pill-container reveal-text-delayed">
+                <button id="heroAudioBtn" class="audio-pill" aria-label="Play Intro">
+                    <div class="audio-icon-wrapper">
+                        <!-- Play Icon -->
+                        <svg class="audio-icon-play" width="12" height="14" viewBox="0 0 12 14" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.5 7L0.5 13.0622L0.5 0.937822L11.5 7Z" fill="currentColor" />
+                        </svg>
+                        <!-- Pause Icon -->
+                        <svg class="audio-icon-pause" width="12" height="14" viewBox="0 0 12 14" fill="none"
+                            xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                            <rect width="4" height="14" rx="1" fill="currentColor" />
+                            <rect x="8" width="4" height="14" rx="1" fill="currentColor" />
+                        </svg>
+                    </div>
+                    <span class="audio-text">Listen to the brief (3 min)</span>
+                </button>
+                <audio id="heroAudio" src="/audio/rsjo.mp3" preload="metadata"></audio>
+            </div>
+        </section>
+
+        <!-- 1. Philosophy / About Section (Moved Up) -->
+        <section class="info-spread-section" id="philosophy">
+            <!-- Leadership Dashboard (Raycast-style Widgets) -->
+            <div class="info-grid creative-layout">
+                <!-- Column 1: Philosophy as "System Specs" -->
+                <div class="info-col specs-col">
+                    <div class="section-header">
+                        <span class="mono-label">// SYSTEM_SPECS</span>
+                    </div>
+
+                    <div class="specs-list">
+                        <div class="spec-item">
+                            <span class="spec-key">01. Core_Metric</span>
+                            <h3 class="spec-value">"Confusion is the real bottleneck."</h3>
+                            <p class="spec-desc">Clarity + focus = faster shipping.</p>
+                        </div>
+
+                        <div class="spec-item">
+                            <span class="spec-key">02. AI_Craft</span>
+                            <h3 class="spec-value">"AI speeds the making. Taste shapes the outcome."</h3>
+                            <p class="spec-desc">Automation + human judgment = premium product.</p>
+                        </div>
+
+                        <div class="spec-item">
+                            <span class="spec-key">03. Design_Leadership</span>
+                            <h3 class="spec-value">"Teams are the product. Shipping is the feature."</h3>
+                            <p class="spec-desc">Direction + standards + coaching = repeatable excellence.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Experience as "Changelog" -->
+                <div class="info-col changelog-col">
+                    <div class="section-header">
+                        <span class="mono-label">// PREVIOUS_CLIENTS</span>
+                    </div>
+
+                    <div class="specs-list clients-grid-flow">
+                        <!-- IKEA -->
+                        <div class="spec-item">
+                            <a href="https://www.ikea.com" target="_blank" class="spec-key client-link-key">ikea.com</a>
+                            <h3 class="spec-value">IKEA</h3>
+                            <p class="spec-desc">Global design system foundation serving millions of users.</p>
+                        </div>
+                        <!-- H&M -->
+                        <div class="spec-item">
+                            <a href="https://www.hm.com" target="_blank" class="spec-key client-link-key">hm.com</a>
+                            <h3 class="spec-value">H&M</h3>
+                            <p class="spec-desc">E-commerce ecosystem optimization.</p>
+                        </div>
+                        <!-- Qapital -->
+                        <div class="spec-item">
+                            <a href="https://www.qapital.com" target="_blank"
+                                class="spec-key client-link-key">qapital.com</a>
+                            <h3 class="spec-value">Qapital</h3>
+                            <p class="spec-desc">Gamified savings app.</p>
+                        </div>
+                        <!-- Paxful -->
+                        <div class="spec-item">
+                            <a href="https://paxful.com" target="_blank" class="spec-key client-link-key">paxful.com</a>
+                            <h3 class="spec-value">Paxful</h3>
+                            <p class="spec-desc">P2P crypto marketplace.</p>
+                        </div>
+                        <!-- Simployer -->
+                        <div class="spec-item">
+                            <a href="https://www.simployer.com" target="_blank"
+                                class="spec-key client-link-key">simployer.com</a>
+                            <h3 class="spec-value">Simployer</h3>
+                            <p class="spec-desc">HR Tech transformation driving 10x workflow efficiency.</p>
+                        </div>
+                        <!-- Tele2 -->
+                        <div class="spec-item">
+                            <a href="https://www.tele2.com" target="_blank"
+                                class="spec-key client-link-key">tele2.com</a>
+                            <h3 class="spec-value">Tele2</h3>
+                            <p class="spec-desc">Telecom digital transformation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Post AI Section -->
+        <section id="post-ai" class="work-section">
+            <div class="section-header" style="justify-content: center;">
+                <span class="mono-label">// THE_END_OF_MANUAL_DESIGN</span>
+            </div>
+
+            <!-- Carousel Container -->
+            <div class="carousel-container">
+                <div class="carousel-slides">
+                    <!-- Slide 1: The shift -->
+                    <div class="carousel-slide active">
+                        <h2 class="carousel-slide-title">
+                            The <span class="highlight">Shift</span>
+                        </h2>
+                        <p class="carousel-slide-text">
+                            AI doesn't just speed up design—it speeds up thinking. It turns an early hunch into options,
+                            pressure-tests direction, and generates UX/UI, copy, prototypes, and code in minutes. That
+                            doesn't make designers less valuable—it changes what "design" is.
+                        </p>
+                    </div>
+
+                    <!-- Slide 2: The new job -->
+                    <div class="carousel-slide">
+                        <h2 class="carousel-slide-title">
+                            The <span class="highlight">New Job</span>
+                        </h2>
+                        <p class="carousel-slide-text">
+                            The job now is making quality repeatable: setting direction, defining standards, and
+                            building the rules teams ship by. Components, behavior, and guardrails keep the output
+                            coherent—even when execution gets fast.
+                        </p>
+                    </div>
+
+                    <!-- Slide 3: The Advantage -->
+                    <div class="carousel-slide">
+                        <h2 class="carousel-slide-title">
+                            The <span class="highlight">Advantage</span>
+                        </h2>
+                        <p class="carousel-slide-text">
+                            When making gets cheaper, judgment becomes the advantage. The winners won't be the teams who
+                            produce the most screens—they'll be the teams who align faster, decide clearer, and ship
+                            consistent experiences at scale.
+                        </p>
+                    </div>
+
+                    <!-- Slide 4: The operating model -->
+                    <div class="carousel-slide">
+                        <h2 class="carousel-slide-title">
+                            The <span class="highlight">Operating Model</span>
+                        </h2>
+                        <p class="carousel-slide-text">
+                            I'm building for: AI speed, human taste—backed by systems teams can actually
+                            ship. Not speed for speed's sake, but momentum with quality. Create clarity on what "good"
+                            looks like, and teams ship with confidence—again and again.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation Stack (Right Side) -->
+                <div class="carousel-nav-stack">
+                    <!-- Previous (Up - Backwards) -->
+                    <button class="carousel-arrow carousel-arrow-prev" aria-label="Previous slide">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 12L10 6L16 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <!-- Next (Down - Forwards) -->
+                    <button class="carousel-arrow carousel-arrow-next" aria-label="Next slide">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 8L10 14L16 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Divider -->
+        <div class="system-boundary">
+            <div class="boundary-line"></div>
+        </div>
+
+        <!-- Script Link -->
+
+
+        <!-- 3. Pre AI Section (formerly Selected Work) -->
+        <section id="work" class="work-section">
+            <div class="section-header" style="justify-content: center;">
+                <span class="mono-label">// BEFORE_THE_PROMPT</span>
+            </div>
+
+            <h1 class="section-main-title">The Hard Way</h1>
+
+            <!-- Introduction Text -->
+            <div class="section-intro">
+                <p>
+                    This is my pre-boom work—before prompts and generators. It’s the craft foundation that lets me ship
+                    faster now, still keeping the same premium quality.
+                </p>
+            </div>
+
+            <!-- Project Split Layout -->
+            <div class="project-layout">
+
+                <!-- Media Focus Container (Glass Shell) -->
+                <div class="app-container">
+                    <main class="app-stage">
+                        <div class="media-shell active" data-id="ikea">
+                            <div class="browser-window">
+                                <div class="browser-top-bar">
+                                    <div class="window-controls">
+                                        <span class="control red"></span>
+                                        <span class="control yellow"></span>
+                                        <span class="control green"></span>
+                                    </div>
+                                    <div class="address-bar">
+                                        <span class="address-text">ikea.com/se/en/p/renfjaellet...</span>
+                                    </div>
+                                </div>
+                                <div class="browser-content scrollable">
+                                    <div class="browser-placeholder">
+                                        <img src="images/ikea_mattress_long.png" alt="IKEA Mattress Project"
+                                            class="browser-img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media-shell" data-id="qapital">
+                            <div class="browser-window">
+                                <div class="browser-top-bar">
+                                    <div class="window-controls">
+                                        <span class="control red"></span>
+                                        <span class="control yellow"></span>
+                                        <span class="control green"></span>
+                                    </div>
+                                    <div class="address-bar">
+                                        <span class="address-text">qapital.com</span>
+                                    </div>
+                                </div>
+                                <div class="browser-content scrollable">
+                                    <div class="browser-placeholder">
+                                        <img src="images/qapital_long.png" alt="Qapital Project" class="browser-img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media-shell" data-id="simployer">
+                            <div class="browser-window">
+                                <div class="browser-top-bar">
+                                    <div class="window-controls">
+                                        <span class="control red"></span>
+                                        <span class="control yellow"></span>
+                                        <span class="control green"></span>
+                                    </div>
+                                    <div class="address-bar">
+                                        <span class="address-text">simployer.com</span>
+                                    </div>
+                                </div>
+                                <div class="browser-content scrollable">
+                                    <div class="browser-placeholder">
+                                        <img src="images/simployer_long.png" alt="Simployer Project"
+                                            class="browser-img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media-shell" data-id="hm">
+                            <div class="browser-window">
+                                <div class="browser-top-bar">
+                                    <div class="window-controls">
+                                        <span class="control red"></span>
+                                        <span class="control yellow"></span>
+                                        <span class="control green"></span>
+                                    </div>
+                                    <div class="address-bar">
+                                        <span class="address-text">hm.com</span>
+                                    </div>
+                                </div>
+                                <div class="browser-content scrollable">
+                                    <div class="browser-placeholder">
+                                        <img src="images/hm_long.png" alt="H&M Project" class="browser-img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media-shell" data-id="paxful">
+                            <div class="browser-window">
+                                <div class="browser-top-bar">
+                                    <div class="window-controls">
+                                        <span class="control red"></span>
+                                        <span class="control yellow"></span>
+                                        <span class="control green"></span>
+                                    </div>
+                                    <div class="address-bar">
+                                        <span class="address-text">paxful.com</span>
+                                    </div>
+                                </div>
+                                <div class="browser-content scrollable">
+                                    <div class="browser-placeholder">
+                                        <img src="images/paxful_long.png" alt="Paxful Project" class="browser-img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+
+                <!-- External Project Picker (Right Side) -->
+                <aside class="project-picker-aside">
+                    <!-- Picker Navigation Arrows -->
+                    <button class="picker-arrow picker-arrow-prev" aria-label="Previous projects">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 12L10 6L16 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+
+                    <div class="picker-track">
+                        <nav class="picker-nav">
+                            <button class="nav-item active" data-target="ikea">
+                                <span class="nav-label">IKEA</span>
+                                <span class="nav-desc">Global design system foundation.</span>
+                            </button>
+                            <button class="nav-item" data-target="qapital">
+                                <span class="nav-label">Qapital</span>
+                                <span class="nav-desc">Holistic banking experience.</span>
+                            </button>
+                            <button class="nav-item" data-target="simployer">
+                                <span class="nav-label">Simployer</span>
+                                <span class="nav-desc">Enterprise HR solutions.</span>
+                            </button>
+                            <button class="nav-item" data-target="hm">
+                                <span class="nav-label">H&M</span>
+                                <span class="nav-desc">E-commerce ecosystem.</span>
+                            </button>
+                            <button class="nav-item" data-target="paxful">
+                                <span class="nav-label">Paxful</span>
+                                <span class="nav-desc">Peer-to-peer crypto platform.</span>
+                            </button>
+                        </nav>
+                    </div>
+
+                    <button class="picker-arrow picker-arrow-next" aria-label="Next projects">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 8L10 14L16 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </aside>
+
+            </div>
+        </section>
+
+        <!-- System Divider -->
+        <div class="system-boundary">
+            <div class="boundary-line"></div>
+        </div>
+
+        <!-- CV & Personal Info Section -->
+        <section id="about-me" class="about-section">
+            <div class="about-container">
+                <!-- Column 1: CV Timeline -->
+                <div class="cv-column">
+                    <div class="section-header">
+                        <span class="mono-label">// EXPERIENCE</span>
+                    </div>
+
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-year">2023 — Present</div>
+                            <div class="timeline-content">
+                                <h3>UX&UI + Brand Design</h3>
+                                <p class="timeline-company">Simployer</p>
+                                <p class="timeline-desc">Senior Product Designer at a leading European HR tech platform.
+                                    Setting design direction and supporting team development while building scalable
+                                    design systems and AI-enabled workflows that help teams ship with clarity and
+                                    confidence.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-year">2015 — 2023</div>
+                            <div class="timeline-content">
+                                <h3>Senior UX&UI Designer</h3>
+                                <p class="timeline-company">Sjoborg Design · Self-employed</p>
+                                <p class="timeline-desc">Consulting and hands-on product design for global brands.
+                                    Specialized in design systems and scalable digital experiences. <strong>15+ years of
+                                        Product Design Leadership</strong>
+                                    turning complexity into clarity.</p>
+                            </div>
+                        </div>
+
+
+                        <div class="timeline-item">
+                            <div class="timeline-year">2007 — 2015</div>
+                            <div class="timeline-content">
+                                <h3>Digital Designer & Co-founder</h3>
+                                <p class="timeline-company">ACNE Production · STATE Interactive · Lowe Brindfors</p>
+                                <p class="timeline-desc">Led design teams and co-founded STATE Interactive. Shaped
+                                    digital craft and direction for major Scandinavian and global brands.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Personal Bio -->
+                <div class="bio-column">
+                    <div class="section-header">
+                        <span class="mono-label">// ABOUT_ME</span>
+                    </div>
+
+                    <div class="bio-content">
+                        <div class="bio-card">
+                            <h2 class="bio-title">Stockholm-based. Optimist by default.</h2>
+                            <p class="bio-text">
+                                Outside of work, I experiment with AI and market data — a mix of curiosity, tinkering,
+                                and problem-solving.
+                            </p>
+                            <p class="bio-text">
+                                Most days revolve around my wife and daughter. And if Malmö FF is playing, I'm watching.
+                            </p>
+                            <p class="bio-text">
+                                I can bring energy when it's needed — and calm when it matters — and I tend to keep
+                                moving toward a positive outcome.
+                            </p>
+                        </div>
+
+                        <div class="bio-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">0%</div>
+                                <div class="stat-label">Confusion</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">1</div>
+                                <div class="stat-label">Obvious path</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">10X</div>
+                                <div class="stat-label">Speed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- System Divider -->
+    <div class="system-boundary">
+        <div class="boundary-line"></div>
+    </div>
+
+    <footer id="contact">
+        <h2 class="footer-title">The Next Step</h2>
+        <p class="footer-description">
+            Big vision. Fast execution. High standards. If that's your vibe—let's talk.
+        </p>
+        <div class="footer-actions">
+            <!-- Email reconstructed in JS to prevent spam -->
+            <button id="emailBtn" class="action-btn" aria-label="Copy Email Address">
+                <span class="btn-text">Copy Email</span>
+            </button>
+
+            <a href="https://www.linkedin.com/in/rasmussjoborg/" target="_blank" class="action-btn"
+                aria-label="Visit LinkedIn">
+                <span class="btn-text">LinkedIn</span>
+            </a>
+        </div>
+        <p class="copyright">&copy; 2026 Rasmus Sjöborg</p>
+    </footer>
+
+    <script src="script.js?v=4"></script>
+</body>
+
+</html>
