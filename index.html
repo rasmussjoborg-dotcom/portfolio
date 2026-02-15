@@ -40,7 +40,7 @@
         href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=17">
+    <link rel="stylesheet" href="style.css?v=19">
 </head>
 
 <body>
@@ -199,6 +199,14 @@
                 <span class="mono-label">// THE_END_OF_MANUAL_DESIGN</span>
             </div>
 
+            <!-- Pill Indicator (Centered Top) -->
+            <div class="pill-indicator-centered">
+                <div class="pill active" data-index="0"></div>
+                <div class="pill" data-index="1"></div>
+                <div class="pill" data-index="2"></div>
+                <div class="pill" data-index="3"></div>
+            </div>
+
             <!-- Carousel Container -->
             <div class="carousel-container">
                 <div class="carousel-slides">
@@ -250,24 +258,23 @@
                         </p>
                     </div>
                 </div>
+            </div>
 
-                <!-- Navigation Stack (Right Side) -->
-                <div class="carousel-nav-stack">
-                    <!-- Previous (Up - Backwards) -->
-                    <button class="carousel-arrow carousel-arrow-prev" aria-label="Previous slide">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 12L10 6L16 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </button>
-                    <!-- Next (Down - Forwards) -->
-                    <button class="carousel-arrow carousel-arrow-next" aria-label="Next slide">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 8L10 14L16 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </button>
-                </div>
+            <!-- Navigation Arrows (Below Slides) -->
+            <div class="carousel-nav-stack">
+                <button class="carousel-arrow carousel-arrow-prev" aria-label="Previous slide">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 12L10 6L16 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+
+                <button class="carousel-arrow carousel-arrow-next" aria-label="Next slide">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 8L10 14L16 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
             </div>
         </section>
 
@@ -301,7 +308,7 @@
                 <!-- Media Focus Container (Glass Shell) -->
                 <div class="app-container">
                     <main class="app-stage">
-                        <div class="media-shell active" data-id="ikea">
+                        <div class="media-shell active" data-id="ikea" data-header-height="80">
                             <div class="browser-window">
                                 <div class="browser-top-bar">
                                     <div class="window-controls">
@@ -310,18 +317,22 @@
                                         <span class="control green"></span>
                                     </div>
                                     <div class="address-bar">
-                                        <span class="address-text">ikea.com/se/en/p/renfjaellet...</span>
+                                        <span class="address-text">IKEA.com</span>
                                     </div>
                                 </div>
                                 <div class="browser-content scrollable">
-                                    <div class="browser-placeholder">
-                                        <img src="images/ikea_mattress_long.png" alt="IKEA Mattress Project"
-                                            class="browser-img">
+                                    <div class="browser-sticky-header">
+                                        <img src="images/ikea-header.png" alt="IKEA Navigation"
+                                            class="browser-header-img">
+                                    </div>
+                                    <div class="browser-scroll-content">
+                                        <img src="images/ikea-content.png" alt="IKEA Content"
+                                            class="browser-content-img">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="media-shell" data-id="qapital">
+                        <div class="media-shell" data-id="qapital" data-header-height="80">
                             <div class="browser-window">
                                 <div class="browser-top-bar">
                                     <div class="window-controls">
@@ -334,13 +345,18 @@
                                     </div>
                                 </div>
                                 <div class="browser-content scrollable">
-                                    <div class="browser-placeholder">
-                                        <img src="images/qapital_long.png" alt="Qapital Project" class="browser-img">
+                                    <div class="browser-sticky-header">
+                                        <img src="images/qapital_header.png" alt="Qapital Navigation"
+                                            class="browser-header-img">
+                                    </div>
+                                    <div class="browser-scroll-content">
+                                        <img src="images/qapital_content.png" alt="Qapital Content"
+                                            class="browser-content-img">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="media-shell" data-id="simployer">
+                        <div class="media-shell" data-id="simployer" data-header-height="80">
                             <div class="browser-window">
                                 <div class="browser-top-bar">
                                     <div class="window-controls">
@@ -353,14 +369,18 @@
                                     </div>
                                 </div>
                                 <div class="browser-content scrollable">
-                                    <div class="browser-placeholder">
-                                        <img src="images/simployer_long.png" alt="Simployer Project"
-                                            class="browser-img">
+                                    <div class="browser-sticky-header">
+                                        <img src="images/simployer_header.png" alt="Simployer Navigation"
+                                            class="browser-header-img">
+                                    </div>
+                                    <div class="browser-scroll-content">
+                                        <img src="images/simployer_content.png" alt="Simployer Content"
+                                            class="browser-content-img">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="media-shell" data-id="hm">
+                        <div class="media-shell" data-id="hm" data-header-height="80">
                             <div class="browser-window">
                                 <div class="browser-top-bar">
                                     <div class="window-controls">
@@ -373,13 +393,16 @@
                                     </div>
                                 </div>
                                 <div class="browser-content scrollable">
-                                    <div class="browser-placeholder">
-                                        <img src="images/hm_long.png" alt="H&M Project" class="browser-img">
+                                    <div class="browser-sticky-header">
+                                        <img src="images/hm_header.png" alt="H&M Navigation" class="browser-header-img">
+                                    </div>
+                                    <div class="browser-scroll-content">
+                                        <img src="images/hm_content.png" alt="H&M Content" class="browser-content-img">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="media-shell" data-id="paxful">
+                        <div class="media-shell" data-id="paxful" data-header-height="80">
                             <div class="browser-window">
                                 <div class="browser-top-bar">
                                     <div class="window-controls">
@@ -392,8 +415,13 @@
                                     </div>
                                 </div>
                                 <div class="browser-content scrollable">
-                                    <div class="browser-placeholder">
-                                        <img src="images/paxful_long.png" alt="Paxful Project" class="browser-img">
+                                    <div class="browser-sticky-header">
+                                        <img src="images/paxful_header.png" alt="Paxful Navigation"
+                                            class="browser-header-img">
+                                    </div>
+                                    <div class="browser-scroll-content">
+                                        <img src="images/paxful_content.png" alt="Paxful Content"
+                                            class="browser-content-img">
                                     </div>
                                 </div>
                             </div>
@@ -566,7 +594,7 @@
         <p class="copyright">&copy; 2026 Rasmus Sjöborg</p>
     </footer>
 
-    <script src="script.js?v=4"></script>
+    <script src="script.js?v=20"></script>
 </body>
 
 </html>

@@ -112,16 +112,38 @@ document.addEventListener('DOMContentLoaded', () => {
             showSlide(prevIndex, 'prev');
         }
 
-        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+        // Update pill indicator
+        function updatePillIndicator(index) {
+            const pills = document.querySelectorAll('.pill');
+            pills.forEach((pill, i) => {
+                if (i === index) {
+                    pill.classList.add('active');
+                } else {
+                    pill.classList.remove('active');
+                }
+            });
+        }
 
-        // Update height on window resize
-        window.addEventListener('resize', () => {
-            updateCarouselHeight(currentSlide);
-        });
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                updatePillIndicator(currentSlide);
+            });
+        }
 
-        // Initial height set with a small delay to ensure layout is stable
-        setTimeout(() => updateCarouselHeight(currentSlide), 100);
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                updatePillIndicator(currentSlide);
+            });
+        }
+
+        // Initialize height and pill indicator
+        updateCarouselHeight(0);
+        updatePillIndicator(0);
+
+        // Adjust on window resize
+        window.addEventListener('resize', () => updateCarouselHeight(currentSlide));
     }
 
 
@@ -310,8 +332,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const pickerBtns = document.querySelectorAll('.nav-item');
     const mediaShells = document.querySelectorAll('.media-shell');
 
+    // --- 6.5. Project Picker Click Handlers ---
     if (pickerBtns.length > 0 && mediaShells.length > 0) {
-        pickerBtns.forEach(btn => {
+        pickerBtns.forEach((btn, btnIndex) => {
             btn.addEventListener('click', () => {
                 const targetId = btn.getAttribute('data-target');
 
