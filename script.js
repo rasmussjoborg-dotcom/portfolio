@@ -276,25 +276,75 @@ document.addEventListener('DOMContentLoaded', () => {
         animate();
     }
 
-    // --- 4. Sticky Contact Button ---
-    const stickyBtn = document.getElementById('stickyContactBtn');
+    // --- 4. Sticky Terminal Top Bar — Typewriter on Scroll ---
+    const terminalBar = document.getElementById('stickyTerminalBar');
+    const terminalText = document.getElementById('terminalText');
 
+    if (terminalBar && terminalText) {
+        const message = 'Is this your vibe? Contact me here';
+        let isTyping = false;
+        let isDeleting = false;
+        let charIndex = 0;
+        let typeTimer = null;
 
-    if (stickyBtn) {
-        // Show/hide on scroll
-        window.addEventListener('scroll', () => {
-            // If user has scrolled down
-            if (window.scrollY > 0) {
-                // Show button immediately
-                stickyBtn.classList.add('visible');
+        const typeWriter = () => {
+            if (charIndex < message.length && !isDeleting) {
+                terminalText.textContent = message.substring(0, charIndex + 1);
+                charIndex++;
+                typeTimer = setTimeout(typeWriter, 45 + Math.random() * 30);
             } else {
-                // Hide button immediately when back at top
-                stickyBtn.classList.remove('visible');
+                isTyping = false;
+                // Stop cursor blink after a short delay
+                const cursor = terminalBar.querySelector('.terminal-cursor');
+                if (cursor) {
+                    setTimeout(() => { cursor.style.animationPlayState = 'paused'; cursor.style.opacity = '0'; }, 2000);
+                }
+            }
+        };
+
+        const deleteWriter = () => {
+            // Re-enable cursor blink while deleting
+            const cursor = terminalBar.querySelector('.terminal-cursor');
+            if (cursor) { cursor.style.animationPlayState = 'running'; cursor.style.opacity = ''; }
+            if (charIndex > 0 && isDeleting) {
+                charIndex--;
+                terminalText.textContent = message.substring(0, charIndex);
+                typeTimer = setTimeout(deleteWriter, 20 + Math.random() * 15);
+            } else {
+                isDeleting = false;
+                terminalBar.classList.remove('visible');
+            }
+        };
+
+        // Show bar on scroll, type text; reverse on scroll back to top
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                if (!isTyping && !isDeleting && charIndex === 0) {
+                    isTyping = true;
+                    terminalBar.classList.add('visible');
+                    clearTimeout(typeTimer);
+                    setTimeout(typeWriter, 400);
+                } else if (isDeleting) {
+                    // User scrolled back down mid-delete — stop deleting and resume typing
+                    isDeleting = false;
+                    clearTimeout(typeTimer);
+                    isTyping = true;
+                    typeWriter();
+                } else if (!terminalBar.classList.contains('visible')) {
+                    terminalBar.classList.add('visible');
+                }
+            } else {
+                if ((isTyping || charIndex > 0) && !isDeleting) {
+                    isTyping = false;
+                    isDeleting = true;
+                    clearTimeout(typeTimer);
+                    deleteWriter();
+                }
             }
         });
 
-        // Scroll to footer on click
-        stickyBtn.addEventListener('click', () => {
+        // Click scrolls to footer
+        terminalBar.addEventListener('click', () => {
             const footer = document.querySelector('footer');
             if (footer) {
                 footer.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -313,11 +363,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             navigator.clipboard.writeText(email).then(() => {
                 const btnText = emailBtn.querySelector('.btn-text');
-                btnText.textContent = 'Copied!';
+                btnText.textContent = '[ COPIED! ]';
                 emailBtn.classList.add('copied');
 
                 setTimeout(() => {
-                    btnText.textContent = 'Copy Email';
+                    btnText.textContent = '[ COPY_EMAIL ]';
                     emailBtn.classList.remove('copied');
                 }, 2000);
             }).catch(err => {
@@ -326,6 +376,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = `mailto:${email}`;
             });
         });
+    }
+
+    // --- 5b. Metrics Count-Up Animation ---
+    const statNumbers = document.querySelectorAll('.stat-number[data-count]');
+    if (statNumbers.length) {
+        const countUp = (el) => {
+            const target = parseInt(el.dataset.count);
+            const suffix = el.dataset.suffix || '';
+            const duration = 1200;
+            const start = performance.now();
+
+            const animate = (now) => {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                // Ease out cubic
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.round(eased * target);
+                el.textContent = current + suffix;
+                if (progress < 1) requestAnimationFrame(animate);
+            };
+            requestAnimationFrame(animate);
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    countUp(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(el => observer.observe(el));
     }
 
     // --- 6. Client Project Picker ---
@@ -355,44 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 7. Project Picker Horizontal Scroll ---
-    const pickerNav = document.querySelector('.picker-nav');
-    const pickerPrev = document.querySelector('.picker-arrow-prev');
-    const pickerNext = document.querySelector('.picker-arrow-next');
-
-    if (pickerNav && pickerPrev && pickerNext) {
-        // Scroll amount (approx width of item + gap)
-        const scrollAmount = 200;
-
-        pickerPrev.addEventListener('click', () => {
-            pickerNav.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        });
-
-        pickerNext.addEventListener('click', () => {
-            pickerNav.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        });
-
-        // Hide/Disable buttons at ends
-        const updateButtons = () => {
-            const tolerance = 5; // buffer
-            const atStart = pickerNav.scrollLeft <= tolerance;
-            // Use scrollWidth - clientWidth to check if we are at the end
-            const atEnd = Math.abs(pickerNav.scrollWidth - pickerNav.clientWidth - pickerNav.scrollLeft) <= tolerance;
-
-            pickerPrev.style.opacity = atStart ? '0.3' : '1';
-            pickerPrev.style.pointerEvents = atStart ? 'none' : 'auto';
-            pickerPrev.style.cursor = atStart ? 'default' : 'pointer';
-
-            pickerNext.style.opacity = atEnd ? '0.3' : '1';
-            pickerNext.style.pointerEvents = atEnd ? 'none' : 'auto';
-            pickerNext.style.cursor = atEnd ? 'default' : 'pointer';
-        };
-
-        pickerNav.addEventListener('scroll', updateButtons);
-        window.addEventListener('resize', updateButtons);
-
-        // Initial check
-        setTimeout(updateButtons, 100);
-    }
+    // (Arrows removed, flex layout now handles full width)
 
     // --- 8. Hero Audio Player ---
     const audioBtn = document.getElementById('heroAudioBtn');
@@ -454,5 +500,109 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+    }
+    // --- 9. Visuals Carousel — Infinite Loop ---
+    const visualsCarousel = document.getElementById('visualsCarousel');
+    const visualsPrev = document.getElementById('visualsPrev');
+    const visualsNext = document.getElementById('visualsNext');
+
+    if (visualsCarousel) {
+        // Clone all cards and append for seamless looping
+        const originalCards = Array.from(visualsCarousel.querySelectorAll('.visual-card'));
+        const totalOriginals = originalCards.length;
+
+        // Clone cards and append
+        originalCards.forEach(card => {
+            const clone = card.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            visualsCarousel.appendChild(clone);
+        });
+
+        const getCardStep = () => {
+            const card = visualsCarousel.querySelector('.visual-card');
+            if (!card) return 364;
+            const style = getComputedStyle(visualsCarousel);
+            const gap = parseFloat(style.gap) || 24;
+            return card.offsetWidth + gap;
+        };
+
+        // Get the total width of the original set
+        const getOriginalWidth = () => getCardStep() * totalOriginals;
+
+        // Start scrolled to the beginning (no offset needed since clones are at the end)
+        let isResetting = false;
+
+        // Listen for scroll to detect when we need to loop
+        visualsCarousel.addEventListener('scroll', () => {
+            if (isResetting) return;
+            const originalWidth = getOriginalWidth();
+            const maxScroll = visualsCarousel.scrollWidth - visualsCarousel.clientWidth;
+
+            // If scrolled past the original cards into clone territory
+            if (visualsCarousel.scrollLeft >= originalWidth) {
+                isResetting = true;
+                visualsCarousel.style.scrollBehavior = 'auto';
+                visualsCarousel.scrollLeft = visualsCarousel.scrollLeft - originalWidth;
+                // Force reflow before re-enabling smooth
+                void visualsCarousel.offsetHeight;
+                visualsCarousel.style.scrollBehavior = 'smooth';
+                isResetting = false;
+            }
+            // If scrolled before start (for backward looping)
+            if (visualsCarousel.scrollLeft <= 0) {
+                isResetting = true;
+                visualsCarousel.style.scrollBehavior = 'auto';
+                visualsCarousel.scrollLeft = visualsCarousel.scrollLeft + originalWidth;
+                void visualsCarousel.offsetHeight;
+                visualsCarousel.style.scrollBehavior = 'smooth';
+                isResetting = false;
+            }
+        });
+
+        // Arrow navigation — just scroll by one card, looping handled by scroll listener
+        if (visualsNext) {
+            visualsNext.addEventListener('click', () => {
+                visualsCarousel.scrollBy({ left: getCardStep(), behavior: 'smooth' });
+            });
+        }
+
+        if (visualsPrev) {
+            visualsPrev.addEventListener('click', () => {
+                visualsCarousel.scrollBy({ left: -getCardStep(), behavior: 'smooth' });
+            });
+        }
+
+        // Drag to scroll
+        let isDragging = false;
+        let startX;
+        let scrollLeft;
+
+        visualsCarousel.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            visualsCarousel.style.cursor = 'grabbing';
+            visualsCarousel.style.scrollBehavior = 'auto';
+            startX = e.pageX - visualsCarousel.offsetLeft;
+            scrollLeft = visualsCarousel.scrollLeft;
+        });
+
+        visualsCarousel.addEventListener('mouseleave', () => {
+            isDragging = false;
+            visualsCarousel.style.cursor = 'grab';
+            visualsCarousel.style.scrollBehavior = 'smooth';
+        });
+
+        visualsCarousel.addEventListener('mouseup', () => {
+            isDragging = false;
+            visualsCarousel.style.cursor = 'grab';
+            visualsCarousel.style.scrollBehavior = 'smooth';
+        });
+
+        visualsCarousel.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - visualsCarousel.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            visualsCarousel.scrollLeft = scrollLeft - walk;
+        });
     }
 });

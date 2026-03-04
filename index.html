@@ -40,7 +40,7 @@
         href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=19">
+    <link rel="stylesheet" href="style.css?v=23">
 </head>
 
 <body>
@@ -51,10 +51,10 @@
         <div class="audio-progress-bar" id="audioProgressBar"></div>
     </div>
 
-    <!-- Sticky Contact Button (appears on scroll) -->
-    <button class="sticky-contact-btn" id="stickyContactBtn">
-        Contact me
-    </button>
+    <!-- Sticky Terminal Top Bar (appears on scroll) -->
+    <div class="sticky-terminal-bar" id="stickyTerminalBar">
+        <span class="terminal-text" id="terminalText"></span><span class="terminal-cursor">▊</span>
+    </div>
 
 
 
@@ -105,7 +105,7 @@
                             <rect x="8" width="4" height="14" rx="1" fill="currentColor" />
                         </svg>
                     </div>
-                    <span class="audio-text">Listen to the brief (3 min)</span>
+                    <span class="audio-text">$ play brief.mp3 --3min</span>
                 </button>
                 <audio id="heroAudio" src="/audio/rsjo.mp3" preload="metadata"></audio>
             </div>
@@ -118,7 +118,7 @@
                 <!-- Column 1: Philosophy as "System Specs" -->
                 <div class="info-col specs-col">
                     <div class="section-header">
-                        <span class="mono-label">// SYSTEM_SPECS</span>
+                        <span class="mono-label">// DESIGN_PRINCIPLES</span>
                     </div>
 
                     <div class="specs-list">
@@ -145,7 +145,7 @@
                 <!-- Column 2: Experience as "Changelog" -->
                 <div class="info-col changelog-col">
                     <div class="section-header">
-                        <span class="mono-label">// PREVIOUS_CLIENTS</span>
+                        <span class="mono-label">// NOTABLE_EXPERIENCE</span>
                     </div>
 
                     <div class="specs-list clients-grid-flow">
@@ -153,45 +153,46 @@
                         <div class="spec-item">
                             <a href="https://www.ikea.com" target="_blank" class="spec-key client-link-key">ikea.com</a>
                             <h3 class="spec-value">IKEA</h3>
-                            <p class="spec-desc">Global design system foundation serving millions of users.</p>
+                            <p class="spec-desc">Global design system.</p>
                         </div>
-                        <!-- H&M -->
+                        <!-- Helmut Lang -->
                         <div class="spec-item">
-                            <a href="https://www.hm.com" target="_blank" class="spec-key client-link-key">hm.com</a>
-                            <h3 class="spec-value">H&M</h3>
-                            <p class="spec-desc">E-commerce ecosystem optimization.</p>
+                            <span class="spec-key client-link-key">helmutlang.com</span>
+                            <h3 class="spec-value">Helmut Lang</h3>
+                            <p class="spec-desc">Global fashion experience.</p>
                         </div>
-                        <!-- Qapital -->
+                        <!-- Android -->
                         <div class="spec-item">
-                            <a href="https://www.qapital.com" target="_blank"
-                                class="spec-key client-link-key">qapital.com</a>
-                            <h3 class="spec-value">Qapital</h3>
-                            <p class="spec-desc">Gamified savings app.</p>
+                            <span class="spec-key client-link-key">android.co.uk</span>
+                            <h3 class="spec-value">Android</h3>
+                            <p class="spec-desc">Digital brand experience.</p>
                         </div>
-                        <!-- Paxful -->
+                        <!-- Jaguar -->
                         <div class="spec-item">
-                            <a href="https://paxful.com" target="_blank" class="spec-key client-link-key">paxful.com</a>
-                            <h3 class="spec-value">Paxful</h3>
-                            <p class="spec-desc">P2P crypto marketplace.</p>
+                            <span class="spec-key client-link-key">jaguar.com</span>
+                            <h3 class="spec-value">Jaguar</h3>
+                            <p class="spec-desc">Interactive digital campaign.</p>
                         </div>
-                        <!-- Simployer -->
-                        <div class="spec-item">
-                            <a href="https://www.simployer.com" target="_blank"
-                                class="spec-key client-link-key">simployer.com</a>
-                            <h3 class="spec-value">Simployer</h3>
-                            <p class="spec-desc">HR Tech transformation driving 10x workflow efficiency.</p>
-                        </div>
-                        <!-- Tele2 -->
-                        <div class="spec-item">
-                            <a href="https://www.tele2.com" target="_blank"
-                                class="spec-key client-link-key">tele2.com</a>
-                            <h3 class="spec-value">Tele2</h3>
-                            <p class="spec-desc">Telecom digital transformation.</p>
+                    </div>
+
+                    <!-- Sectors Log -->
+                    <div class="sectors-log">
+                        <span class="sectors-prompt">&gt; sectors.log</span>
+                        <div class="sectors-line">
+                            <span class="sectors-status active">SHIPPED</span>
+                            <span class="sectors-list">fintech, e-commerce, cryptocurrency, fashion, b2b saas and
+                                more..</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- System Divider -->
+        <div class="system-boundary">
+            <span class="boundary-terminal">//
+                ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————</span>
+        </div>
 
         <!-- 2. Post AI Section -->
         <section id="post-ai" class="work-section">
@@ -280,7 +281,8 @@
 
         <!-- System Divider -->
         <div class="system-boundary">
-            <div class="boundary-line"></div>
+            <span class="boundary-terminal">//
+                ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————</span>
         </div>
 
         <!-- Script Link -->
@@ -332,7 +334,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="media-shell" data-id="qapital" data-header-height="80">
+                        <div class="media-shell" data-id="qapital">
                             <div class="browser-window">
                                 <div class="browser-top-bar">
                                     <div class="window-controls">
@@ -345,13 +347,8 @@
                                     </div>
                                 </div>
                                 <div class="browser-content scrollable">
-                                    <div class="browser-sticky-header">
-                                        <img src="images/qapital_header.png" alt="Qapital Navigation"
-                                            class="browser-header-img">
-                                    </div>
                                     <div class="browser-scroll-content">
-                                        <img src="images/qapital_content.png" alt="Qapital Content"
-                                            class="browser-content-img">
+                                        <img src="images/qapital-content.png" alt="Qapital" class="browser-content-img">
                                     </div>
                                 </div>
                             </div>
@@ -370,11 +367,11 @@
                                 </div>
                                 <div class="browser-content scrollable">
                                     <div class="browser-sticky-header">
-                                        <img src="images/simployer_header.png" alt="Simployer Navigation"
+                                        <img src="images/simployer-header.png" alt="Simployer Navigation"
                                             class="browser-header-img">
                                     </div>
                                     <div class="browser-scroll-content">
-                                        <img src="images/simployer_content.png" alt="Simployer Content"
+                                        <img src="images/simployer-content.png" alt="Simployer Content"
                                             class="browser-content-img">
                                     </div>
                                 </div>
@@ -394,34 +391,10 @@
                                 </div>
                                 <div class="browser-content scrollable">
                                     <div class="browser-sticky-header">
-                                        <img src="images/hm_header.png" alt="H&M Navigation" class="browser-header-img">
+                                        <img src="images/hm-header.png" alt="H&M Navigation" class="browser-header-img">
                                     </div>
                                     <div class="browser-scroll-content">
-                                        <img src="images/hm_content.png" alt="H&M Content" class="browser-content-img">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media-shell" data-id="paxful" data-header-height="80">
-                            <div class="browser-window">
-                                <div class="browser-top-bar">
-                                    <div class="window-controls">
-                                        <span class="control red"></span>
-                                        <span class="control yellow"></span>
-                                        <span class="control green"></span>
-                                    </div>
-                                    <div class="address-bar">
-                                        <span class="address-text">paxful.com</span>
-                                    </div>
-                                </div>
-                                <div class="browser-content scrollable">
-                                    <div class="browser-sticky-header">
-                                        <img src="images/paxful_header.png" alt="Paxful Navigation"
-                                            class="browser-header-img">
-                                    </div>
-                                    <div class="browser-scroll-content">
-                                        <img src="images/paxful_content.png" alt="Paxful Content"
-                                            class="browser-content-img">
+                                        <img src="images/hm-content.png" alt="H&M Content" class="browser-content-img">
                                     </div>
                                 </div>
                             </div>
@@ -431,19 +404,11 @@
 
                 <!-- External Project Picker (Right Side) -->
                 <aside class="project-picker-aside">
-                    <!-- Picker Navigation Arrows -->
-                    <button class="picker-arrow picker-arrow-prev" aria-label="Previous projects">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 12L10 6L16 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </button>
-
                     <div class="picker-track">
                         <nav class="picker-nav">
                             <button class="nav-item active" data-target="ikea">
                                 <span class="nav-label">IKEA</span>
-                                <span class="nav-desc">Global design system foundation.</span>
+                                <span class="nav-desc">Global design system.</span>
                             </button>
                             <button class="nav-item" data-target="qapital">
                                 <span class="nav-label">Qapital</span>
@@ -457,19 +422,8 @@
                                 <span class="nav-label">H&M</span>
                                 <span class="nav-desc">E-commerce ecosystem.</span>
                             </button>
-                            <button class="nav-item" data-target="paxful">
-                                <span class="nav-label">Paxful</span>
-                                <span class="nav-desc">Peer-to-peer crypto platform.</span>
-                            </button>
                         </nav>
                     </div>
-
-                    <button class="picker-arrow picker-arrow-next" aria-label="Next projects">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 8L10 14L16 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </button>
                 </aside>
 
             </div>
@@ -477,7 +431,8 @@
 
         <!-- System Divider -->
         <div class="system-boundary">
-            <div class="boundary-line"></div>
+            <span class="boundary-terminal">//
+                ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————</span>
         </div>
 
         <!-- CV & Personal Info Section -->
@@ -552,28 +507,89 @@
 
                         <div class="bio-stats">
                             <div class="stat-item">
-                                <div class="stat-number">0%</div>
+                                <div class="stat-number" data-count="0" data-suffix="%">0%</div>
                                 <div class="stat-label">Confusion</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-number">1</div>
+                                <div class="stat-number" data-count="1" data-suffix="">1</div>
                                 <div class="stat-label">Obvious path</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-number">10X</div>
+                                <div class="stat-number" data-count="10" data-suffix="X">10X</div>
                                 <div class="stat-label">Speed</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Visuals from the Past -->
+            <div class="section-header" style="justify-content: center; margin-top: var(--space-lg);">
+                <span class="mono-label">// VISUALS_FROM_THE_PAST</span>
+            </div>
+
+            <div class="visuals-carousel-wrapper">
+                <button class="visuals-arrow visuals-arrow-prev" id="visualsPrev" aria-label="Previous">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <div class="visuals-carousel" id="visualsCarousel">
+                    <div class="visual-card">
+                        <div class="visual-card-img">
+                            <img src="images/visuals-android.jpg" alt="Android" loading="lazy">
+                        </div>
+                        <span class="visual-card-label">android.co.uk</span>
+                    </div>
+                    <div class="visual-card">
+                        <div class="visual-card-img">
+                            <img src="images/visuals-filippak.jpg" alt="Filippak" loading="lazy">
+                        </div>
+                        <span class="visual-card-label">Filippa K</span>
+                    </div>
+                    <div class="visual-card">
+                        <div class="visual-card-img">
+                            <img src="images/visuals-helmutlang.jpg" alt="Helmut Lang" loading="lazy">
+                        </div>
+                        <span class="visual-card-label">Helmutlang.com</span>
+                    </div>
+                    <div class="visual-card">
+                        <div class="visual-card-img">
+                            <img src="images/visuals-nokia.jpg" alt="Nokia" loading="lazy">
+                        </div>
+                        <span class="visual-card-label">Nokia.com</span>
+                    </div>
+                    <div class="visual-card">
+                        <div class="visual-card-img">
+                            <img src="images/visuals-magnum.jpg" alt="Magnum" loading="lazy">
+                        </div>
+                        <span class="visual-card-label">Magnum</span>
+                    </div>
+                    <div class="visual-card">
+                        <div class="visual-card-img">
+                            <img src="images/visuals-jaguar.jpg" alt="Jaguar X Dua Lipa" loading="lazy">
+                        </div>
+                        <span class="visual-card-label">Jaguar X Dua Lipa</span>
+                    </div>
+                </div>
+                <button class="visuals-arrow visuals-arrow-next" id="visualsNext" aria-label="Next">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
         </section>
     </main>
 
     <!-- System Divider -->
     <div class="system-boundary">
-        <div class="boundary-line"></div>
+        <span class="boundary-terminal">//
+            ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————</span>
     </div>
+
+
 
     <footer id="contact">
         <h2 class="footer-title">The Next Step</h2>
@@ -582,19 +598,19 @@
         </p>
         <div class="footer-actions">
             <!-- Email reconstructed in JS to prevent spam -->
-            <button id="emailBtn" class="action-btn" aria-label="Copy Email Address">
-                <span class="btn-text">Copy Email</span>
+            <button id="emailBtn" class="action-btn terminal-btn" aria-label="Copy Email Address">
+                <span class="btn-text">[ COPY_EMAIL ]</span>
             </button>
 
-            <a href="https://www.linkedin.com/in/rasmussjoborg/" target="_blank" class="action-btn"
+            <a href="https://www.linkedin.com/in/rasmussjoborg/" target="_blank" class="action-btn terminal-btn"
                 aria-label="Visit LinkedIn">
-                <span class="btn-text">LinkedIn</span>
+                <span class="btn-text">[ LINKEDIN ]</span>
             </a>
         </div>
-        <p class="copyright">&copy; 2026 Rasmus Sjöborg</p>
+        <p class="copyright">// built by rasmus.sjoborg — v2026.03</p>
     </footer>
 
-    <script src="script.js?v=20"></script>
+    <script src="script.js?v=21"></script>
 </body>
 
 </html>
