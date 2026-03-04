@@ -2167,6 +2167,12 @@ footer {
     font-family: var(--font-mono);
 }
 
+@media (max-width: 768px) {
+    .carousel-arrow {
+        display: none;
+    }
+}
+
 .carousel-arrow:hover {
     border-color: rgba(253, 254, 189, 0.3);
     background: rgba(255, 255, 255, 0.05);
