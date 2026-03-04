@@ -800,11 +800,12 @@ section {
 /* Sticky Header Container */
 .browser-sticky-header {
     position: sticky;
-    top: 0;
+    top: -1px;
     z-index: 10;
     width: 100%;
     background: #fff;
     overflow: hidden;
+    border-top: 1px solid #fff;
 }
 
 .browser-header-img {
@@ -1254,7 +1255,7 @@ section {
 /* Sticky Terminal Top Bar */
 .sticky-terminal-bar {
     position: fixed;
-    top: 0;
+    top: env(safe-area-inset-top, 0px);
     left: 0;
     right: 0;
     z-index: 1000;
