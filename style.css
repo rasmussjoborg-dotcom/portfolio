@@ -1354,7 +1354,7 @@ section {
     }
 
     .rotator-window {
-        width: 5.5em;
+        width: 7.5em;
     }
 
     /* Info Grid */
@@ -1694,8 +1694,7 @@ section {
     }
 
     .carousel-arrow {
-        width: 36px;
-        height: 36px;
+        display: none;
     }
 
     .carousel-slide-title {
