@@ -1693,8 +1693,31 @@ section {
         padding: 0 1rem;
     }
 
+    .carousel-nav-stack {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        margin-top: 1.5rem;
+    }
+
     .carousel-arrow {
-        display: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+    }
+
+    .carousel-arrow svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* Rotate chevrons to point left/right on mobile */
+    .carousel-arrow-prev svg {
+        transform: rotate(-90deg);
+    }
+
+    .carousel-arrow-next svg {
+        transform: rotate(-90deg);
     }
 
     .carousel-slide-title {
@@ -2167,11 +2190,7 @@ footer {
     font-family: var(--font-mono);
 }
 
-@media (max-width: 768px) {
-    .carousel-arrow {
-        display: none;
-    }
-}
+/* Mobile carousel arrows handled in main mobile block above */
 
 .carousel-arrow:hover {
     border-color: rgba(253, 254, 189, 0.3);
