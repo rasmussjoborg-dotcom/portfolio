@@ -497,12 +497,25 @@ body {
 }
 
 .job-company {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--color-text-muted);
-    margin-bottom: 6px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.job-company-desc {
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+    font-style: italic;
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
+
+.job-tag.sector {
+    color: #c084fc;
+    border-color: rgba(192, 132, 252, 0.3);
 }
 
 .job-company-logo {

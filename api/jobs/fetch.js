@@ -89,6 +89,8 @@ export default async function handler(req, res) {
                 score: scoring.score,
                 reasoning: scoring.reasoning,
                 locationTier: scoring.locationTier,
+                sector: scoring.sector || "Unknown",
+                companyDescription: scoring.companyDescription || "",
                 status: "new", // new | applied | dismissed
                 statusUpdatedAt: null,
             };

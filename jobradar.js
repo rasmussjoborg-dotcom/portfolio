@@ -150,8 +150,10 @@
             ${job.companyLogo ? `<img src="${job.companyLogo}" class="job-company-logo" alt="" onerror="this.style.display='none'">` : ''}
             ${escapeHtml(job.company)}
           </div>
+          ${job.companyDescription ? `<div class="job-company-desc">${escapeHtml(job.companyDescription)}</div>` : ''}
           <div class="job-meta">
             ${locationTag}
+            ${job.sector && job.sector !== 'Unknown' ? `<span class="job-tag sector">${escapeHtml(job.sector)}</span>` : ''}
             ${job.type ? `<span class="job-tag">${escapeHtml(job.type)}</span>` : ''}
             ${postedDate ? `<span class="job-tag">${postedDate}</span>` : ''}
             ${job.status === 'applied' ? '<span class="job-tag" style="color: #818cf8; border-color: rgba(129,140,248,0.3);">✓ Applied</span>' : ''}
