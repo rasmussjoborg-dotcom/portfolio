@@ -7,6 +7,9 @@ import { storeJob, jobExists, setLastSync, clearAllJobs } from "../../lib/kv.js"
 
 const JSEARCH_API_URL = "https://jsearch.p.rapidapi.com/search";
 
+// Vercel Hobby allows up to 60s for serverless functions
+export const config = { maxDuration: 60 };
+
 export default async function handler(req, res) {
     // Verify this is a cron invocation or has auth
     const authHeader = req.headers.authorization;
@@ -65,45 +68,53 @@ export default async function handler(req, res) {
         let newJobs = 0;
         let skippedDupes = 0;
 
+        // Filter out existing jobs first
+        const jobsToScore = [];
         for (const job of jobs) {
-            // Generate a stable ID from the job
             const jobId = generateJobId(job);
-
-            // Skip if we already have this job
             if (await jobExists(jobId)) {
                 skippedDupes++;
-                continue;
+            } else {
+                jobsToScore.push({ job, jobId });
             }
+        }
 
-            // Score the job
-            const scoring = await scoreJob(job);
+        // Score in parallel batches of 3 to stay within rate limits
+        const BATCH_SIZE = 3;
+        for (let i = 0; i < jobsToScore.length; i += BATCH_SIZE) {
+            const batch = jobsToScore.slice(i, i + BATCH_SIZE);
+            const results = await Promise.all(
+                batch.map(async ({ job, jobId }) => {
+                    const scoring = await scoreJob(job);
+                    return {
+                        id: jobId,
+                        title: job.job_title || "Unknown Title",
+                        company: job.employer_name || "Unknown Company",
+                        companyLogo: job.employer_logo || null,
+                        location: formatLocation(job),
+                        isRemote: job.job_is_remote || false,
+                        type: job.job_employment_type || "Unknown",
+                        description: (job.job_description || "").substring(0, 1000),
+                        applyUrl: job.job_apply_link || job.job_google_link || null,
+                        linkedinUrl: job.job_google_link || null,
+                        postedAt: job.job_posted_at_datetime_utc || null,
+                        fetchedAt: new Date().toISOString(),
+                        searchQuery: query,
+                        score: scoring.score,
+                        reasoning: scoring.reasoning,
+                        locationTier: scoring.locationTier,
+                        sector: scoring.sector || "Unknown",
+                        companyDescription: scoring.companyDescription || "",
+                        status: "new",
+                        statusUpdatedAt: null,
+                    };
+                })
+            );
 
-            // Build our job record
-            const jobRecord = {
-                id: jobId,
-                title: job.job_title || "Unknown Title",
-                company: job.employer_name || "Unknown Company",
-                companyLogo: job.employer_logo || null,
-                location: formatLocation(job),
-                isRemote: job.job_is_remote || false,
-                type: job.job_employment_type || "Unknown",
-                description: (job.job_description || "").substring(0, 1000),
-                applyUrl: job.job_apply_link || job.job_google_link || null,
-                linkedinUrl: job.job_google_link || null,
-                postedAt: job.job_posted_at_datetime_utc || null,
-                fetchedAt: new Date().toISOString(),
-                searchQuery: query,
-                score: scoring.score,
-                reasoning: scoring.reasoning,
-                locationTier: scoring.locationTier,
-                sector: scoring.sector || "Unknown",
-                companyDescription: scoring.companyDescription || "",
-                status: "new", // new | applied | dismissed
-                statusUpdatedAt: null,
-            };
-
-            await storeJob(jobRecord);
-            newJobs++;
+            for (const jobRecord of results) {
+                await storeJob(jobRecord);
+                newJobs++;
+            }
         }
 
         // Update last sync timestamp
