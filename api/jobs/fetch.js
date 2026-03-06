@@ -3,7 +3,7 @@
 
 import { profile } from "../../lib/profile.js";
 import { scoreJob } from "../../lib/scorer.js";
-import { storeJob, jobExists, setLastSync } from "../../lib/kv.js";
+import { storeJob, jobExists, setLastSync, clearAllJobs } from "../../lib/kv.js";
 
 const JSEARCH_API_URL = "https://jsearch.p.rapidapi.com/search";
 
@@ -27,6 +27,13 @@ export default async function handler(req, res) {
     }
 
     try {
+        // Check for reset flag (clears all jobs to allow re-scoring)
+        const resetParam = req.query?.reset || req.url?.includes('reset=true');
+        if (resetParam) {
+            const cleared = await clearAllJobs();
+            console.log(`[JobFetch] Reset: cleared ${cleared} existing jobs`);
+        }
+
         // Pick today's search query (rotate daily)
         const dayOfWeek = new Date().getDay(); // 0-6
         const query = profile.search_queries[dayOfWeek % profile.search_queries.length];
