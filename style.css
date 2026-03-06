@@ -1711,14 +1711,7 @@ section {
         height: 18px;
     }
 
-    /* Rotate chevrons to point left/right on mobile */
-    .carousel-arrow-prev svg {
-        transform: rotate(-90deg);
-    }
 
-    .carousel-arrow-next svg {
-        transform: rotate(-90deg);
-    }
 
     .carousel-slide-title {
         font-size: 2rem;
