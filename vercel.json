@@ -1,0 +1,14 @@
+{
+    "rewrites": [
+        {
+            "source": "/jobradar",
+            "destination": "/jobradar.html"
+        }
+    ],
+    "crons": [
+        {
+            "path": "/api/jobs/fetch",
+            "schedule": "0 7 * * *"
+        }
+    ]
+}

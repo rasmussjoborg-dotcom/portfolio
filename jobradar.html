@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Radar — RS</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📡</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="jobradar.css">
+</head>
+
+<body>
+    <!-- Auth Gate -->
+    <div id="authGate" class="auth-gate">
+        <div class="auth-card">
+            <div class="auth-icon">📡</div>
+            <h1 class="auth-title">Job Radar</h1>
+            <p class="auth-subtitle">// enter access token</p>
+            <form id="authForm" class="auth-form">
+                <input type="password" id="tokenInput" class="auth-input" placeholder="Bearer token" autofocus
+                    autocomplete="off">
+                <button type="submit" class="auth-btn">Authenticate</button>
+            </form>
+            <p id="authError" class="auth-error" hidden>Invalid token. Try again.</p>
+        </div>
+    </div>
+
+    <!-- Dashboard (hidden until auth) -->
+    <div id="dashboard" class="dashboard" hidden>
+        <!-- Header -->
+        <header class="dash-header">
+            <div class="dash-header-left">
+                <a href="/" class="dash-back">← rsjo.io</a>
+                <h1 class="dash-title">Job Radar</h1>
+                <span class="dash-badge">PRIVATE</span>
+            </div>
+            <div class="dash-header-right">
+                <span id="lastSync" class="dash-sync">Last sync: —</span>
+                <button id="manualFetch" class="dash-fetch-btn" title="Trigger manual fetch">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12a9 9 0 11-6.219-8.56" />
+                        <polyline points="21 3 21 9 15 9" />
+                    </svg>
+                    Fetch now
+                </button>
+            </div>
+        </header>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <span class="stat-label">Total Jobs</span>
+                <span id="statTotal" class="stat-value">—</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Avg Score</span>
+                <span id="statAvg" class="stat-value">—</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Applied</span>
+                <span id="statApplied" class="stat-value accent">—</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Dismissed</span>
+                <span id="statDismissed" class="stat-value muted">—</span>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-bar">
+            <div class="filter-group">
+                <label class="filter-label">Location</label>
+                <div class="filter-pills" id="locationFilter">
+                    <button class="filter-pill active" data-value="all">All</button>
+                    <button class="filter-pill" data-value="remote">🌍 Remote</button>
+                    <button class="filter-pill" data-value="stockholm">📍 Stockholm</button>
+                    <button class="filter-pill" data-value="relocation">✈️ Relocation</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Status</label>
+                <div class="filter-pills" id="statusFilter">
+                    <button class="filter-pill active" data-value="new">New</button>
+                    <button class="filter-pill" data-value="all">All</button>
+                    <button class="filter-pill" data-value="applied">Applied</button>
+                    <button class="filter-pill" data-value="dismissed">Dismissed</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Min Score</label>
+                <div class="score-slider-container">
+                    <input type="range" id="scoreSlider" class="score-slider" min="0" max="100" value="0" step="5">
+                    <span id="scoreValue" class="score-slider-value">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Job List -->
+        <div id="jobList" class="job-list">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state" hidden>
+            <div class="empty-icon">📡</div>
+            <h2 class="empty-title">No jobs yet</h2>
+            <p class="empty-desc">The radar hasn't found any listings yet. Hit "Fetch now" to trigger the first scan, or
+                wait for the daily cron job.</p>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-state" hidden>
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Scanning the radar...</p>
+        </div>
+    </div>
+
+    <script src="jobradar.js"></script>
+</body>
+
+</html>
