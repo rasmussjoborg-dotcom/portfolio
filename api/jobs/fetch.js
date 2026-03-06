@@ -112,6 +112,11 @@ export default async function handler(req, res) {
             );
 
             for (const jobRecord of results) {
+                // Skip tier 0 jobs (rejected locations like US/Americas)
+                if (jobRecord.locationTier === 0) {
+                    console.log(`[JobFetch] Skipping ${jobRecord.title} — tier 0 (${jobRecord.location})`);
+                    continue;
+                }
                 await storeJob(jobRecord);
                 newJobs++;
             }
