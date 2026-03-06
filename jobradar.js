@@ -136,12 +136,16 @@
         const statusClass = job.status === 'dismissed' ? 'dismissed' : job.status === 'applied' ? 'applied' : '';
         const locationTag = getLocationTag(job);
         const postedDate = job.postedAt ? formatRelativeTime(new Date(job.postedAt)) : '';
+        const isNew = job.fetchedAt && (Date.now() - new Date(job.fetchedAt).getTime()) < 12 * 60 * 60 * 1000;
 
         return `
       <div class="job-card ${statusClass}" data-id="${job.id}">
         <div class="score-badge ${scoreClass}">${job.score}</div>
         <div class="job-info">
-          <div class="job-title">${escapeHtml(job.title)}</div>
+          <div class="job-title">
+            ${isNew ? '<span class="new-badge">NEW</span>' : ''}
+            ${escapeHtml(job.title)}
+          </div>
           <div class="job-company">
             ${job.companyLogo ? `<img src="${job.companyLogo}" class="job-company-logo" alt="" onerror="this.style.display='none'">` : ''}
             ${escapeHtml(job.company)}
