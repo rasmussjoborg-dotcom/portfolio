@@ -142,6 +142,13 @@
       <div class="job-card ${statusClass}" data-id="${job.id}">
         <div class="score-badge ${scoreClass}">${job.score}</div>
         <div class="job-info">
+          <div class="job-meta">
+            ${locationTag}
+            ${job.sector && job.sector !== 'Unknown' ? `<span class="job-tag sector">${escapeHtml(job.sector)}</span>` : ''}
+            ${job.type ? `<span class="job-tag">${escapeHtml(job.type)}</span>` : ''}
+            ${postedDate ? `<span class="job-tag">${postedDate}</span>` : ''}
+            ${job.status === 'applied' ? '<span class="job-tag" style="color: #818cf8; border-color: rgba(129,140,248,0.3);">✓ Applied</span>' : ''}
+          </div>
           <div class="job-title">
             ${isNew ? '<span class="new-badge">NEW</span>' : ''}
             ${escapeHtml(job.title)}
@@ -151,13 +158,6 @@
             ${escapeHtml(job.company)}
           </div>
           ${job.companyDescription ? `<div class="job-company-desc">${escapeHtml(job.companyDescription)}</div>` : ''}
-          <div class="job-meta">
-            ${locationTag}
-            ${job.sector && job.sector !== 'Unknown' ? `<span class="job-tag sector">${escapeHtml(job.sector)}</span>` : ''}
-            ${job.type ? `<span class="job-tag">${escapeHtml(job.type)}</span>` : ''}
-            ${postedDate ? `<span class="job-tag">${postedDate}</span>` : ''}
-            ${job.status === 'applied' ? '<span class="job-tag" style="color: #818cf8; border-color: rgba(129,140,248,0.3);">✓ Applied</span>' : ''}
-          </div>
           <div class="job-reasoning">"${escapeHtml(job.reasoning)}"</div>
         </div>
         <div class="job-actions">
