@@ -481,6 +481,56 @@
             color: var(--color-text-muted);
         }
 
+        /* ── Iframe View ── */
+        .iframe-view {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-bg);
+            z-index: 100;
+            display: none;
+        }
+
+        .iframe-view.visible { display: flex; flex-direction: column; }
+
+        .iframe-topbar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.6rem 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+            background: var(--color-surface);
+            flex-shrink: 0;
+        }
+
+        .iframe-back {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .iframe-back:hover { color: var(--color-accent); }
+        .iframe-back::before { content: '← '; }
+
+        .iframe-title {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--color-text-main);
+            font-weight: 600;
+        }
+
+        .iframe-frame {
+            flex: 1;
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+
         /* ── Mobile ── */
         @media (max-width: 600px) {
             .hub { padding: 0 1.25rem; }
@@ -518,15 +568,24 @@
             </footer>
         </div>
 
-        <!-- Approved Apps Section -->
-        <div class="section" id="approvedAppsView">
+        <!-- Approved Ideas Section -->
+        <div class="section" id="approvedIdeasView">
             <a class="section-back" onclick="showDashboard()">Back to Hub</a>
-            <h2 class="section-title">Approved Apps</h2>
+            <h2 class="section-title">Approved Ideas</h2>
             <p class="section-subtitle">NIGHT SHIFT — shipped prototypes</p>
             <div id="appsContent">
                 <div class="loading"><div class="spinner"></div> Fetching projects...</div>
             </div>
         </div>
+    </div>
+
+    <!-- The Judge Iframe View -->
+    <div class="iframe-view" id="judgeView">
+        <div class="iframe-topbar">
+            <a class="iframe-back" onclick="hideJudge()">Back to Hub</a>
+            <span class="iframe-title">🏛️ The Judge</span>
+        </div>
+        <iframe class="iframe-frame" id="judgeFrame" src=""></iframe>
     </div>
 
     <script>
@@ -540,16 +599,16 @@
                 icon: '🏛️',
                 title: 'The Judge',
                 desc: 'AI-powered XAUUSD macro-sentiment scan. Multi-agent war room for daily gold trading bias.',
-                url: 'https://judge.rsjo.io',
+                action: 'showJudge',
                 status: 'live',
             },
             {
-                id: 'approved-apps',
+                id: 'approved-ideas',
                 icon: '🌙',
-                title: 'Approved Apps',
+                title: 'Approved Ideas',
                 desc: 'Prototypes built by Night Shift and approved for shipping. Browse all completed projects.',
-                url: null, // internal view
-                status: null, // loaded dynamically
+                action: 'showApprovedIdeas',
+                status: null,
             },
         ];
 
@@ -601,11 +660,7 @@
                         <div class="preview-loading">Loading...</div>
                     </div>`;
 
-                if (p.url) {
-                    return `<a href="${p.url}" target="_blank" class="nav-card">${inner}</a>`;
-                } else {
-                    return `<div class="nav-card" onclick="showApprovedApps()">${inner}</div>`;
-                }
+                return `<div class="nav-card" onclick="${p.action}()">${inner}</div>`;
             }).join('');
 
             // Fetch live data in parallel
@@ -655,7 +710,7 @@
         }
 
         async function fetchAppsPreview() {
-            const el = document.getElementById('preview-approved-apps');
+            const el = document.getElementById('preview-approved-ideas');
             if (!el) return;
             try {
                 const [shipped, queue] = await Promise.all([
@@ -692,16 +747,28 @@
             }
         }
 
-        // ── Approved Apps View ──
-        function showApprovedApps() {
+        // ── Judge View ──
+        function showJudge() {
+            const frame = document.getElementById('judgeFrame');
+            frame.src = 'https://judge.rsjo.io';
+            document.getElementById('judgeView').classList.add('visible');
+        }
+
+        function hideJudge() {
+            document.getElementById('judgeView').classList.remove('visible');
+            document.getElementById('judgeFrame').src = '';
+        }
+
+        // ── Approved Ideas View ──
+        function showApprovedIdeas() {
             document.getElementById('dashboardView').style.display = 'none';
-            const section = document.getElementById('approvedAppsView');
+            const section = document.getElementById('approvedIdeasView');
             section.classList.add('visible');
             loadApprovedApps();
         }
 
         function showDashboard() {
-            document.getElementById('approvedAppsView').classList.remove('visible');
+            document.getElementById('approvedIdeasView').classList.remove('visible');
             document.getElementById('dashboardView').style.display = 'block';
         }
 
