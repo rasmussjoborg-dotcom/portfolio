@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RS — Hub</title>
+    <title>rsjo hub</title>
     <meta name="robots" content="noindex, nofollow">
 
     <link rel="icon"
@@ -56,10 +56,7 @@
             gap: 1.5rem;
         }
 
-        .gate-logo {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
+        .gate-logo { font-size: 2.5rem; margin-bottom: 0.5rem; }
 
         .gate-title {
             font-family: var(--font-mono);
@@ -94,60 +91,76 @@
         }
 
         /* ── Hub Layout ── */
-        .hub { display: none; max-width: 980px; margin: 0 auto; padding: 0 2rem; }
+        .hub { display: none; max-width: 1100px; margin: 0 auto; padding: 0 2rem 4rem; }
         .hub.visible { display: block; }
 
         .hub-header {
-            padding: 4rem 0 1rem;
+            padding: 3rem 0 2.5rem;
             text-align: center;
         }
 
-        .hub-logo { font-size: 2.5rem; margin-bottom: 1rem; }
-
         .hub-title {
-            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 300;
+            letter-spacing: -0.03em;
+            color: var(--color-text-main);
+        }
+
+        .hub-title strong {
             font-weight: 600;
-            letter-spacing: -0.04em;
-            margin-bottom: 0.5rem;
         }
 
-        .hub-tagline {
+        /* ── Sections ── */
+        .section-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-label {
             font-family: var(--font-mono);
-            font-size: 0.82rem;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             color: var(--color-text-muted);
-            letter-spacing: 0.04em;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 1rem;
         }
 
-        /* ── Navigation Grid ── */
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.25rem;
-            margin: 3rem 0;
+        .section-label::before { content: '// '; opacity: 0.4; }
+
+        .section-cards {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
         }
 
+        .section-cards::-webkit-scrollbar { height: 0; }
+
+        /* ── Cards ── */
         .nav-card {
             background: var(--color-surface);
             border: 1px solid var(--color-border);
             border-radius: var(--radius-md);
-            padding: 1.75rem;
+            padding: 1.5rem;
             text-decoration: none;
             color: var(--color-text-main);
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 0.6rem;
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            min-width: 260px;
+            flex: 1;
+            max-width: 340px;
         }
 
         .nav-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 2px;
             background: var(--color-accent);
             opacity: 0;
@@ -162,56 +175,57 @@
 
         .nav-card:hover::before { opacity: 1; }
 
-        .nav-card-icon { font-size: 1.8rem; }
+        .nav-card.placeholder {
+            opacity: 0.4;
+            cursor: default;
+        }
+
+        .nav-card.placeholder:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: var(--color-border);
+        }
+
+        .nav-card.placeholder::before { display: none; }
+
+        .nav-card-icon { font-size: 1.5rem; }
 
         .nav-card-title {
-            font-size: 1.15rem;
+            font-size: 1rem;
             font-weight: 600;
             letter-spacing: -0.01em;
         }
 
         .nav-card-desc {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--color-text-muted);
-            line-height: 1.5;
+            line-height: 1.45;
         }
-
-        .nav-card-status {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--color-accent);
-            margin-top: auto;
-            padding-top: 0.5rem;
-        }
-
-        .nav-card-status::before { content: '> '; opacity: 0.5; }
 
         /* ── Card Preview Panels ── */
         .card-preview {
-            margin-top: 0.5rem;
-            padding-top: 0.75rem;
+            margin-top: 0.4rem;
+            padding-top: 0.6rem;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .preview-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
         .preview-item {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 1px;
         }
 
-        .preview-wide {
-            grid-column: 1 / -1;
-        }
+        .preview-wide { grid-column: 1 / -1; }
 
         .preview-label {
             font-family: var(--font-mono);
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 0.06em;
             color: var(--color-text-muted);
@@ -219,7 +233,7 @@
 
         .preview-value {
             font-family: var(--font-mono);
-            font-size: 0.82rem;
+            font-size: 0.78rem;
             font-weight: 600;
             color: var(--color-text-main);
         }
@@ -227,26 +241,19 @@
         .preview-active {
             color: var(--color-accent);
             font-weight: 400;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
         }
 
-        .preview-loading {
+        .preview-loading, .preview-empty {
             font-family: var(--font-mono);
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             color: var(--color-text-muted);
-            padding: 0.25rem 0;
+            padding: 0.2rem 0;
         }
 
-        .preview-empty {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--color-text-muted);
-            padding: 0.25rem 0;
-        }
-
-        /* ── Section: Approved Apps ── */
-        .section { display: none; }
-        .section.visible { display: block; }
+        /* ── Sub-views (Approved Ideas, etc.) ── */
+        .section-view { display: none; }
+        .section-view.visible { display: block; }
 
         .section-back {
             font-family: var(--font-mono);
@@ -263,7 +270,7 @@
         .section-back::before { content: '← '; }
 
         .section-title {
-            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-size: clamp(1.5rem, 3vw, 2rem);
             font-weight: 600;
             letter-spacing: -0.03em;
             margin-bottom: 0.25rem;
@@ -271,17 +278,17 @@
 
         .section-subtitle {
             font-family: var(--font-mono);
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             color: var(--color-text-muted);
             margin-bottom: 2rem;
         }
 
         .section-subtitle::before { content: '// '; opacity: 0.5; }
 
-        /* ── Project Grid (Approved Apps) ── */
+        /* ── Project Grid ── */
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.25rem;
             margin-bottom: 4rem;
         }
@@ -309,10 +316,7 @@
             align-items: flex-start;
         }
 
-        .card-title {
-            font-size: 1.05rem;
-            font-weight: 600;
-        }
+        .card-title { font-size: 1.05rem; font-weight: 600; }
 
         .card-nights {
             font-family: var(--font-mono);
@@ -341,11 +345,7 @@
             color: var(--color-text-muted);
         }
 
-        .card-links {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: auto;
-        }
+        .card-links { display: flex; gap: 0.75rem; margin-top: auto; }
 
         .card-link {
             font-family: var(--font-mono);
@@ -377,22 +377,17 @@
         }
 
         .active-pulse {
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             background: var(--color-accent);
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
         .active-text { font-size: 0.85rem; }
         .active-text strong { color: var(--color-accent); }
 
-        /* ── Empty State ── */
         .empty-state {
             text-align: center;
             padding: 3rem 2rem;
@@ -400,7 +395,6 @@
             font-size: 0.9rem;
         }
 
-        /* ── Loading ── */
         .loading {
             display: flex;
             align-items: center;
@@ -412,8 +406,7 @@
         }
 
         .spinner {
-            width: 14px;
-            height: 14px;
+            width: 14px; height: 14px;
             border: 2px solid var(--color-border);
             border-top-color: var(--color-accent);
             border-radius: 50%;
@@ -422,24 +415,7 @@
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ── Footer ── */
-        .hub-footer {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--color-text-muted);
-            text-align: center;
-            padding: 3rem 0 2rem;
-            border-top: 1px solid var(--color-border);
-            margin-top: 2rem;
-        }
-
-        .hub-footer a {
-            color: var(--color-text-main);
-            text-decoration: none;
-        }
-        .hub-footer a:hover { color: var(--color-accent); }
-
-        /* ── Divider ── */
+        /* ── Queue ── */
         .queue-section { margin-bottom: 3rem; }
         .queue-label {
             font-family: var(--font-mono);
@@ -470,10 +446,7 @@
             min-width: 2rem;
         }
 
-        .queue-idea {
-            font-size: 0.85rem;
-            flex: 1;
-        }
+        .queue-idea { font-size: 0.85rem; flex: 1; }
 
         .queue-date {
             font-family: var(--font-mono);
@@ -481,13 +454,24 @@
             color: var(--color-text-muted);
         }
 
+        /* ── Footer ── */
+        .hub-footer {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--color-text-muted);
+            text-align: center;
+            padding: 3rem 0 2rem;
+            border-top: 1px solid var(--color-border);
+            margin-top: 1rem;
+        }
+
+        .hub-footer a { color: var(--color-text-main); text-decoration: none; }
+        .hub-footer a:hover { color: var(--color-accent); }
+
         /* ── Iframe View ── */
         .iframe-view {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: var(--color-bg);
             z-index: 100;
             display: none;
@@ -533,8 +517,9 @@
 
         /* ── Mobile ── */
         @media (max-width: 600px) {
-            .hub { padding: 0 1.25rem; }
-            .nav-grid { grid-template-columns: 1fr; }
+            .hub { padding: 0 1.25rem 4rem; }
+            .section-cards { flex-direction: column; }
+            .nav-card { min-width: unset; max-width: unset; }
             .project-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -544,7 +529,7 @@
     <!-- Password Gate -->
     <div class="gate" id="gate">
         <div class="gate-logo">⚡</div>
-        <span class="gate-title">Mission Control</span>
+        <span class="gate-title">rsjo hub</span>
         <input type="password" class="gate-input" id="passwordInput" placeholder="password" autofocus>
         <div class="gate-error" id="gateError"></div>
     </div>
@@ -554,22 +539,19 @@
         <!-- Main Dashboard -->
         <div id="dashboardView">
             <header class="hub-header">
-                <div class="hub-logo">⚡</div>
-                <h1 class="hub-title">Mission Control</h1>
-                <p class="hub-tagline">All systems. One place.</p>
+                <h1 class="hub-title"><strong>rsjo</strong> hub</h1>
             </header>
 
-            <div class="nav-grid" id="navGrid">
-                <!-- Cards rendered by JS -->
-            </div>
+            <!-- Sections rendered by JS -->
+            <div id="sectionsContainer"></div>
 
             <footer class="hub-footer">
                 // built by <a href="https://rsjo.io">rasmus.sjöborg</a>
             </footer>
         </div>
 
-        <!-- Approved Ideas Section -->
-        <div class="section" id="approvedIdeasView">
+        <!-- Approved Ideas Sub-view -->
+        <div class="section-view" id="approvedIdeasView">
             <a class="section-back" onclick="showDashboard()">Back to Hub</a>
             <h2 class="section-title">Approved Ideas</h2>
             <p class="section-subtitle">NIGHT SHIFT — shipped prototypes</p>
@@ -592,23 +574,37 @@
         const API_BASE = 'https://gravity-claw-production-6bdf.up.railway.app';
         let password = '';
 
-        // ── Project Registry ──
-        const PROJECTS = [
+        // ── Section + Card Registry ──
+        const SECTIONS = [
             {
-                id: 'judge',
-                icon: '🏛️',
-                title: 'The Judge',
-                desc: 'AI-powered XAUUSD macro-sentiment scan. Multi-agent war room for daily gold trading bias.',
-                action: 'showJudge',
-                status: 'live',
+                id: 'personal',
+                label: 'Personal',
+                cards: [
+                    { id: 'placeholder-personal-1', icon: '👤', title: 'Coming soon', desc: 'Personal projects will appear here.', placeholder: true },
+                ],
             },
             {
-                id: 'approved-ideas',
-                icon: '🌙',
-                title: 'Approved Ideas',
-                desc: 'Prototypes built by Night Shift and approved for shipping. Browse all completed projects.',
-                action: 'showApprovedIdeas',
-                status: null,
+                id: 'work',
+                label: 'Work',
+                cards: [
+                    { id: 'placeholder-work-1', icon: '💼', title: 'Coming soon', desc: 'Work projects will appear here.', placeholder: true },
+                ],
+            },
+            {
+                id: 'trade',
+                label: 'Trade',
+                cards: [
+                    { id: 'judge', icon: '🏛️', title: 'The Judge', desc: 'AI-powered XAUUSD macro-sentiment scan.', action: 'showJudge' },
+                ],
+            },
+            {
+                id: 'build',
+                label: 'Build',
+                cards: [
+                    { id: 'approved-ideas', icon: '🌙', title: 'Approved Ideas', desc: 'Night Shift shipped prototypes.', action: 'showApprovedIdeas' },
+                    { id: 'factory', icon: '🏭', title: 'The Factory', desc: 'Polish and iterate until production ready.', placeholder: true },
+                    { id: 'appstore', icon: '🚀', title: 'App Store', desc: 'Finished apps ready for upload.', placeholder: true },
+                ],
             },
         ];
 
@@ -643,27 +639,34 @@
         async function unlock() {
             gate.style.display = 'none';
             hub.classList.add('visible');
-            await renderDashboard();
+            renderDashboard();
         }
 
         // ── Dashboard ──
-        async function renderDashboard() {
-            const grid = document.getElementById('navGrid');
+        function renderDashboard() {
+            const container = document.getElementById('sectionsContainer');
 
-            // Render cards immediately with loading state
-            grid.innerHTML = PROJECTS.map(p => {
-                const inner = `
-                    <span class="nav-card-icon">${p.icon}</span>
-                    <span class="nav-card-title">${p.title}</span>
-                    <span class="nav-card-desc">${p.desc}</span>
-                    <div class="card-preview" id="preview-${p.id}">
-                        <div class="preview-loading">Loading...</div>
+            container.innerHTML = SECTIONS.map(section => {
+                const cards = section.cards.map(c => {
+                    const placeholderClass = c.placeholder ? ' placeholder' : '';
+                    const onclick = c.action ? `onclick="${c.action}()"` : '';
+                    return `
+                        <div class="nav-card${placeholderClass}" ${onclick}>
+                            <span class="nav-card-icon">${c.icon}</span>
+                            <span class="nav-card-title">${c.title}</span>
+                            <span class="nav-card-desc">${c.desc}</span>
+                            ${!c.placeholder ? `<div class="card-preview" id="preview-${c.id}"><div class="preview-loading">Loading...</div></div>` : ''}
+                        </div>`;
+                }).join('');
+
+                return `
+                    <div class="section-group">
+                        <div class="section-label">${section.label}</div>
+                        <div class="section-cards">${cards}</div>
                     </div>`;
-
-                return `<div class="nav-card" onclick="${p.action}()">${inner}</div>`;
             }).join('');
 
-            // Fetch live data in parallel
+            // Fetch live data
             fetchJudgePreview();
             fetchAppsPreview();
         }
@@ -682,7 +685,6 @@
                 const time = data.metadata?.scan_time
                     ? new Date(data.metadata.scan_time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
                     : '—';
-
                 const biasColor = bias === 'LONG' ? '#4ade80' : bias === 'SHORT' ? '#f87171' : '#fbbf24';
 
                 el.innerHTML = `
@@ -749,8 +751,7 @@
 
         // ── Judge View ──
         function showJudge() {
-            const frame = document.getElementById('judgeFrame');
-            frame.src = 'https://judge.rsjo.io';
+            document.getElementById('judgeFrame').src = 'https://judge.rsjo.io';
             document.getElementById('judgeView').classList.add('visible');
         }
 
@@ -762,9 +763,8 @@
         // ── Approved Ideas View ──
         function showApprovedIdeas() {
             document.getElementById('dashboardView').style.display = 'none';
-            const section = document.getElementById('approvedIdeasView');
-            section.classList.add('visible');
-            loadApprovedApps();
+            document.getElementById('approvedIdeasView').classList.add('visible');
+            loadApprovedIdeas();
         }
 
         function showDashboard() {
@@ -772,7 +772,7 @@
             document.getElementById('dashboardView').style.display = 'block';
         }
 
-        async function loadApprovedApps() {
+        async function loadApprovedIdeas() {
             const content = document.getElementById('appsContent');
             try {
                 const [shipped, queue] = await Promise.all([
@@ -782,7 +782,6 @@
 
                 let html = '';
 
-                // Active build
                 if (queue.active && queue.active.length > 0) {
                     const a = queue.active[0];
                     html += `
@@ -792,7 +791,6 @@
                         </div>`;
                 }
 
-                // Queue
                 if (queue.queue && queue.queue.length > 0) {
                     html += `<div class="queue-section">`;
                     html += `<div class="queue-label">Queue (${queue.queue.length})</div>`;
@@ -809,7 +807,6 @@
                     html += `</div></div>`;
                 }
 
-                // Shipped projects
                 if (shipped.projects && shipped.projects.length > 0) {
                     html += `<div class="queue-label">Shipped (${shipped.projects.length})</div>`;
                     html += `<div class="project-grid">`;
