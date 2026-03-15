@@ -11,6 +11,11 @@
         {
             "source": "/hub",
             "destination": "/hub.html"
+        },
+        {
+            "source": "/:path*",
+            "has": [{ "type": "host", "value": "hub.rsjo.io" }],
+            "destination": "/hub.html"
         }
     ],
     "crons": [
