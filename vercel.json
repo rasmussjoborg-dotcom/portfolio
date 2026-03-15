@@ -11,11 +11,14 @@
         {
             "source": "/hub",
             "destination": "/hub.html"
-        },
+        }
+    ],
+    "redirects": [
         {
-            "source": "/:path*",
+            "source": "/",
             "has": [{ "type": "host", "value": "hub.rsjo.io" }],
-            "destination": "/hub.html"
+            "destination": "/hub",
+            "permanent": false
         }
     ],
     "crons": [
