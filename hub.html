@@ -23,15 +23,15 @@
             --color-surface-hover: #111111;
             --color-text-main: #ededed;
             --color-text-muted: #888888;
-            --color-border: #222222;
-            --color-border-hover: #444444;
+            --color-border: #333333;
+            --color-border-hover: #555555;
             --color-accent: #FDFEBD;
-            --color-accent-glow: rgba(253, 254, 189, 0.12);
-            --font-main: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            --color-accent-glow: rgba(253, 254, 189, 0.15);
+            --font-main: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             --font-mono: 'Space Mono', monospace;
             --radius-sm: 8px;
-            --radius-md: 14px;
-            --radius-lg: 20px;
+            --radius-md: 12px;
+            --radius-lg: 24px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,6 +44,16 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Noise overlay — matches portfolio */
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
         }
 
         /* ── Password Gate ── */
@@ -95,14 +105,16 @@
         .hub.visible { display: block; }
 
         .hub-header {
-            padding: 3rem 0 2.5rem;
-            text-align: center;
+            padding: 4rem 0 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .hub-title {
-            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
             font-weight: 300;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.04em;
             color: var(--color-text-main);
         }
 
@@ -110,20 +122,29 @@
             font-weight: 600;
         }
 
+        .hub-tagline {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--color-text-muted);
+            margin-top: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .hub-tagline::before { content: '> '; opacity: 0.4; }
+
         /* ── Sections ── */
         .section-group {
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
         }
 
         .section-label {
             font-family: var(--font-mono);
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             color: var(--color-text-muted);
             padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--color-border);
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         .section-label::before { content: '// '; opacity: 0.4; }
@@ -145,7 +166,7 @@
             padding: 1.5rem;
             text-decoration: none;
             color: var(--color-text-main);
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             display: flex;
             flex-direction: column;
             gap: 0.6rem;
@@ -161,23 +182,24 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
-            height: 2px;
-            background: var(--color-accent);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
             opacity: 0;
             transition: opacity 0.3s;
         }
 
         .nav-card:hover {
             border-color: var(--color-border-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.7);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px -8px rgba(0, 0, 0, 0.5);
         }
 
         .nav-card:hover::before { opacity: 1; }
 
         .nav-card.placeholder {
-            opacity: 0.4;
+            opacity: 0.35;
             cursor: default;
+            border-style: dashed;
         }
 
         .nav-card.placeholder:hover {
@@ -188,7 +210,7 @@
 
         .nav-card.placeholder::before { display: none; }
 
-        .nav-card-icon { font-size: 1.5rem; }
+        .nav-card-icon { font-size: 1.4rem; }
 
         .nav-card-title {
             font-size: 1rem;
@@ -199,7 +221,7 @@
         .nav-card-desc {
             font-size: 0.8rem;
             color: var(--color-text-muted);
-            line-height: 1.45;
+            line-height: 1.5;
         }
 
         /* ── Card Preview Panels ── */
@@ -526,6 +548,8 @@
 </head>
 
 <body>
+    <div class="noise-overlay"></div>
+
     <!-- Password Gate -->
     <div class="gate" id="gate">
         <div class="gate-logo">⚡</div>
@@ -540,6 +564,7 @@
         <div id="dashboardView">
             <header class="hub-header">
                 <h1 class="hub-title"><strong>rsjo</strong> hub</h1>
+                <p class="hub-tagline">All systems. One place.</p>
             </header>
 
             <!-- Sections rendered by JS -->
