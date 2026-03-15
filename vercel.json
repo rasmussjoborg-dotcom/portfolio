@@ -7,6 +7,10 @@
         {
             "source": "/jobradar",
             "destination": "/jobradar.html"
+        },
+        {
+            "source": "/hub",
+            "destination": "/hub.html"
         }
     ],
     "crons": [
