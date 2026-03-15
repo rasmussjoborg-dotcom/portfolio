@@ -186,6 +186,64 @@
 
         .nav-card-status::before { content: '> '; opacity: 0.5; }
 
+        /* ── Card Preview Panels ── */
+        .card-preview {
+            margin-top: 0.5rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .preview-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .preview-wide {
+            grid-column: 1 / -1;
+        }
+
+        .preview-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--color-text-muted);
+        }
+
+        .preview-value {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--color-text-main);
+        }
+
+        .preview-active {
+            color: var(--color-accent);
+            font-weight: 400;
+            font-size: 0.78rem;
+        }
+
+        .preview-loading {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--color-text-muted);
+            padding: 0.25rem 0;
+        }
+
+        .preview-empty {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--color-text-muted);
+            padding: 0.25rem 0;
+        }
+
         /* ── Section: Approved Apps ── */
         .section { display: none; }
         .section.visible { display: block; }
@@ -533,40 +591,105 @@
         async function renderDashboard() {
             const grid = document.getElementById('navGrid');
 
-            // Try to get app count for the badge
-            let appCount = null;
-            try {
-                const res = await fetch(`${API_BASE}/api/shipped-projects?pw=${encodeURIComponent(password)}`);
-                const data = await res.json();
-                appCount = data.projects?.length ?? 0;
-            } catch {}
-
+            // Render cards immediately with loading state
             grid.innerHTML = PROJECTS.map(p => {
-                let statusText = '';
-                if (p.id === 'approved-apps' && appCount !== null) {
-                    statusText = `${appCount} app${appCount !== 1 ? 's' : ''} shipped`;
-                } else if (p.status) {
-                    statusText = p.status;
-                }
+                const inner = `
+                    <span class="nav-card-icon">${p.icon}</span>
+                    <span class="nav-card-title">${p.title}</span>
+                    <span class="nav-card-desc">${p.desc}</span>
+                    <div class="card-preview" id="preview-${p.id}">
+                        <div class="preview-loading">Loading...</div>
+                    </div>`;
 
                 if (p.url) {
-                    return `
-                        <a href="${p.url}" target="_blank" class="nav-card">
-                            <span class="nav-card-icon">${p.icon}</span>
-                            <span class="nav-card-title">${p.title}</span>
-                            <span class="nav-card-desc">${p.desc}</span>
-                            ${statusText ? `<span class="nav-card-status">${statusText}</span>` : ''}
-                        </a>`;
+                    return `<a href="${p.url}" target="_blank" class="nav-card">${inner}</a>`;
                 } else {
-                    return `
-                        <div class="nav-card" onclick="showApprovedApps()">
-                            <span class="nav-card-icon">${p.icon}</span>
-                            <span class="nav-card-title">${p.title}</span>
-                            <span class="nav-card-desc">${p.desc}</span>
-                            ${statusText ? `<span class="nav-card-status">${statusText}</span>` : ''}
-                        </div>`;
+                    return `<div class="nav-card" onclick="showApprovedApps()">${inner}</div>`;
                 }
             }).join('');
+
+            // Fetch live data in parallel
+            fetchJudgePreview();
+            fetchAppsPreview();
+        }
+
+        async function fetchJudgePreview() {
+            const el = document.getElementById('preview-judge');
+            if (!el) return;
+            try {
+                const res = await fetch('https://judge.rsjo.io/api/scan', { signal: AbortSignal.timeout(8000) });
+                if (!res.ok) { el.innerHTML = '<div class="preview-empty">No scan today</div>'; return; }
+                const data = await res.json();
+                const v = data.verdict || {};
+                const bias = v.final_decision || '—';
+                const score = v.certainty_score ?? '—';
+                const regime = v.regime_detected || '—';
+                const time = data.metadata?.scan_time
+                    ? new Date(data.metadata.scan_time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
+                    : '—';
+
+                const biasColor = bias === 'LONG' ? '#4ade80' : bias === 'SHORT' ? '#f87171' : '#fbbf24';
+
+                el.innerHTML = `
+                    <div class="preview-grid">
+                        <div class="preview-item">
+                            <span class="preview-label">Bias</span>
+                            <span class="preview-value" style="color:${biasColor}">${bias}</span>
+                        </div>
+                        <div class="preview-item">
+                            <span class="preview-label">Conviction</span>
+                            <span class="preview-value">${score}/10</span>
+                        </div>
+                        <div class="preview-item">
+                            <span class="preview-label">Regime</span>
+                            <span class="preview-value">${regime}</span>
+                        </div>
+                        <div class="preview-item">
+                            <span class="preview-label">Scanned</span>
+                            <span class="preview-value">${time}</span>
+                        </div>
+                    </div>`;
+            } catch {
+                el.innerHTML = '<div class="preview-empty">Offline</div>';
+            }
+        }
+
+        async function fetchAppsPreview() {
+            const el = document.getElementById('preview-approved-apps');
+            if (!el) return;
+            try {
+                const [shipped, queue] = await Promise.all([
+                    fetch(`${API_BASE}/api/shipped-projects?pw=${encodeURIComponent(password)}`).then(r => r.json()),
+                    fetch(`${API_BASE}/api/queue?pw=${encodeURIComponent(password)}`).then(r => r.json()),
+                ]);
+
+                const shipCount = shipped.projects?.length ?? 0;
+                const queueCount = queue.queue?.length ?? 0;
+                const active = queue.active?.[0];
+
+                let html = '<div class="preview-grid">';
+                html += `
+                    <div class="preview-item">
+                        <span class="preview-label">Shipped</span>
+                        <span class="preview-value">${shipCount}</span>
+                    </div>
+                    <div class="preview-item">
+                        <span class="preview-label">Queue</span>
+                        <span class="preview-value">${queueCount}</span>
+                    </div>`;
+
+                if (active) {
+                    html += `
+                        <div class="preview-item preview-wide">
+                            <span class="preview-label">Building</span>
+                            <span class="preview-value preview-active">⚡ ${esc(active.title)} — Night ${active.night_number}</span>
+                        </div>`;
+                }
+                html += '</div>';
+                el.innerHTML = html;
+            } catch {
+                el.innerHTML = '<div class="preview-empty">Could not load</div>';
+            }
         }
 
         // ── Approved Apps View ──
