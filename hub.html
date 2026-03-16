@@ -367,7 +367,7 @@
             color: var(--color-text-muted);
         }
 
-        .card-links { display: flex; gap: 0.75rem; margin-top: auto; }
+        .card-links { display: flex; gap: 0.75rem; margin-top: auto; flex-wrap: wrap; }
 
         .card-link {
             font-family: var(--font-mono);
@@ -384,6 +384,215 @@
             border-color: var(--color-accent);
             color: var(--color-accent);
             background: var(--color-accent-glow);
+        }
+
+        /* ── WIP Card (Work in Progress) ── */
+        .wip-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 2.5rem;
+            align-items: start;
+            transition: all 0.3s ease;
+        }
+
+        .wip-card:hover {
+            border-color: var(--color-border-hover);
+            box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .wip-card {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .wip-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .wip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .wip-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .wip-status {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 3px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .wip-status.building {
+            color: #fbbf24;
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        .wip-status.reviewing {
+            color: #60a5fa;
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+        }
+
+        .wip-status.presented {
+            color: #34d399;
+            background: rgba(52, 211, 153, 0.1);
+            border: 1px solid rgba(52, 211, 153, 0.2);
+        }
+
+        .wip-desc {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .wip-meta {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--color-text-muted);
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .wip-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .wip-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .pick-btn {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #000;
+            background: var(--color-accent);
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .pick-btn:hover {
+            background: #e8e9a0;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(253, 254, 189, 0.3);
+        }
+
+        .pick-btn:disabled {
+            opacity: 0.4;
+            cursor: default;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ── Phone Frame ── */
+        .phone-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .phone-frame {
+            width: 260px;
+            height: 520px;
+            border-radius: 36px;
+            border: 3px solid #2a2a2a;
+            background: #000;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 0 1px #1a1a1a, 0 20px 50px -15px rgba(0, 0, 0, 0.7);
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 22px;
+            background: #000;
+            border-radius: 0 0 16px 16px;
+            z-index: 2;
+        }
+
+        .phone-notch::after {
+            content: '';
+            position: absolute;
+            top: 7px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: #1a1a1a;
+            border-radius: 50%;
+        }
+
+        .phone-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #111;
+        }
+
+        /* ── Variation Tabs ── */
+        .var-tabs {
+            display: flex;
+            gap: 0.4rem;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            padding: 3px;
+        }
+
+        .var-tab {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.35rem 0.85rem;
+            border-radius: 6px;
+            border: none;
+            background: transparent;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .var-tab:hover {
+            color: var(--color-text-main);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .var-tab.active {
+            background: var(--color-accent);
+            color: #000;
         }
 
         /* ── Active Build Banner ── */
@@ -807,15 +1016,72 @@
 
                 let html = '';
 
+                // Active build banner
                 if (queue.active && queue.active.length > 0) {
-                    const a = queue.active[0];
-                    html += `
-                        <div class="active-build">
-                            <div class="active-pulse"></div>
-                            <span class="active-text">Building <strong>${esc(a.title)}</strong> — Night ${a.night_number}</span>
-                        </div>`;
+                    for (const a of queue.active) {
+                        if (!a.vercel_url) {
+                            html += `
+                                <div class="active-build">
+                                    <div class="active-pulse"></div>
+                                    <span class="active-text">Building <strong>${esc(a.title)}</strong> — Night ${a.night_number}</span>
+                                </div>`;
+                        }
+                    }
                 }
 
+                // Split projects into WIP vs Completed
+                const allProjects = shipped.projects || [];
+                const wipProjects = allProjects.filter(p => ['building', 'reviewing', 'presented'].includes(p.status));
+                const doneProjects = allProjects.filter(p => ['iterating', 'shipped'].includes(p.status));
+
+                // ── WIP Section ──
+                if (wipProjects.length > 0) {
+                    html += `<div class="queue-label">Work in Progress (${wipProjects.length})</div>`;
+                    for (const p of wipProjects) {
+                        const idea = p.idea_raw ? p.idea_raw.split('\n')[0].slice(0, 200) : '';
+                        const activeVar = p.selected_variation || 'v1';
+                        const date = new Date(p.updated_at + 'Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+                        html += `
+                        <div class="wip-card" id="wip-${p.slug}">
+                            <div class="wip-info">
+                                <div class="wip-header">
+                                    <span class="wip-title">${esc(p.title)}</span>
+                                    <span class="wip-status ${p.status}">${p.status}</span>
+                                </div>
+                                ${idea ? `<div class="wip-desc">${esc(idea)}</div>` : ''}
+                                <div class="wip-meta">
+                                    <span>Night ${p.night_number}</span>
+                                    <span>${date}</span>
+                                </div>
+                                <div class="wip-actions">
+                                    <div class="wip-links">
+                                        ${p.vercel_url ? `<a href="${p.vercel_url}/v1" target="_blank" class="card-link">V1 ↗</a>` : ''}
+                                        ${p.vercel_url ? `<a href="${p.vercel_url}/v2" target="_blank" class="card-link">V2 ↗</a>` : ''}
+                                        ${p.vercel_url ? `<a href="${p.vercel_url}/v3" target="_blank" class="card-link">V3 ↗</a>` : ''}
+                                        ${p.repo_url ? `<a href="${p.repo_url}" target="_blank" class="card-link">GitHub ↗</a>` : ''}
+                                    </div>
+                                    <button class="pick-btn" onclick="pickVariation('${p.slug}')" id="pick-${p.slug}">
+                                        Lock in <span id="pick-label-${p.slug}">${activeVar.toUpperCase()}</span>
+                                    </button>
+                                </div>
+                            </div>
+                            ${p.vercel_url ? `
+                            <div class="phone-wrap">
+                                <div class="var-tabs" id="tabs-${p.slug}">
+                                    <button class="var-tab ${activeVar === 'v1' ? 'active' : ''}" onclick="switchVar('${p.slug}', 'v1', '${p.vercel_url}')">V1</button>
+                                    <button class="var-tab ${activeVar === 'v2' ? 'active' : ''}" onclick="switchVar('${p.slug}', 'v2', '${p.vercel_url}')">V2</button>
+                                    <button class="var-tab ${activeVar === 'v3' ? 'active' : ''}" onclick="switchVar('${p.slug}', 'v3', '${p.vercel_url}')">V3</button>
+                                </div>
+                                <div class="phone-frame">
+                                    <div class="phone-notch"></div>
+                                    <iframe class="phone-iframe" id="frame-${p.slug}" src="${p.vercel_url}/${activeVar}" loading="lazy"></iframe>
+                                </div>
+                            </div>` : ''}
+                        </div>`;
+                    }
+                }
+
+                // ── Queue ──
                 if (queue.queue && queue.queue.length > 0) {
                     html += `<div class="queue-section">`;
                     html += `<div class="queue-label">Queue (${queue.queue.length})</div>`;
@@ -832,10 +1098,11 @@
                     html += `</div></div>`;
                 }
 
-                if (shipped.projects && shipped.projects.length > 0) {
-                    html += `<div class="queue-label">Shipped (${shipped.projects.length})</div>`;
+                // ── Shipped / Done ──
+                if (doneProjects.length > 0) {
+                    html += `<div class="queue-label">Shipped (${doneProjects.length})</div>`;
                     html += `<div class="project-grid">`;
-                    for (const p of shipped.projects) {
+                    for (const p of doneProjects) {
                         const date = new Date(p.updated_at + 'Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
                         const idea = p.idea_raw ? p.idea_raw.split('\n')[0].slice(0, 150) : '';
                         html += `
@@ -845,9 +1112,9 @@
                                     <span class="card-nights">${p.night_number} night${p.night_number > 1 ? 's' : ''}</span>
                                 </div>
                                 ${idea ? `<div class="card-idea">${esc(idea)}</div>` : ''}
-                                <div class="card-meta">shipped ${date}</div>
+                                <div class="card-meta">${p.status === 'shipped' ? 'shipped' : 'iterating'} · ${date}</div>
                                 <div class="card-links">
-                                    ${p.vercel_url ? `<a href="${p.vercel_url}/${p.selected_variation || 'v1'}" target="_blank" class="card-link">📱 Prototype</a>` : ''}
+                                    ${p.vercel_url ? `<a href="${p.vercel_url}/${p.selected_variation || 'v1'}" target="_blank" class="card-link">📱 ${(p.selected_variation || 'v1').toUpperCase()}</a>` : ''}
                                     ${p.repo_url ? `<a href="${p.repo_url}" target="_blank" class="card-link">🔗 GitHub</a>` : ''}
                                 </div>
                             </div>`;
@@ -855,13 +1122,65 @@
                     html += `</div>`;
                 }
 
-                if ((!shipped.projects || shipped.projects.length === 0) && (!queue.queue || queue.queue.length === 0)) {
+                if (allProjects.length === 0 && (!queue.queue || queue.queue.length === 0)) {
                     html = `<div class="empty-state">🌙 No prototypes yet. Send /new in Telegram to start.</div>`;
                 }
 
                 content.innerHTML = html;
             } catch (err) {
                 content.innerHTML = `<div class="empty-state">❌ Could not connect to the API.</div>`;
+            }
+        }
+
+        // ── Phone Frame Variation Switching ──
+        function switchVar(slug, variation, baseUrl) {
+            const iframe = document.getElementById(`frame-${slug}`);
+            if (iframe) iframe.src = `${baseUrl}/${variation}`;
+
+            // Update tabs
+            const tabs = document.querySelectorAll(`#tabs-${slug} .var-tab`);
+            tabs.forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update pick button label
+            const label = document.getElementById(`pick-label-${slug}`);
+            if (label) label.textContent = variation.toUpperCase();
+
+            // Store active variation on the card
+            const card = document.getElementById(`wip-${slug}`);
+            if (card) card.dataset.activeVar = variation;
+        }
+
+        // ── Variation Picker ──
+        async function pickVariation(slug) {
+            const card = document.getElementById(`wip-${slug}`);
+            const variation = card?.dataset?.activeVar || 'v1';
+            const btn = document.getElementById(`pick-${slug}`);
+
+            if (!confirm(`Lock in ${variation.toUpperCase()} for ${slug}? This will start the iteration phase.`)) return;
+
+            btn.disabled = true;
+            btn.textContent = 'Locking in...';
+
+            try {
+                const res = await fetch(`${API_BASE}/api/select-variation`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ slug, variation, pw: password }),
+                });
+
+                if (res.ok) {
+                    btn.textContent = `✅ ${variation.toUpperCase()} locked in!`;
+                    btn.style.background = '#34d399';
+                    setTimeout(() => loadApprovedIdeas(), 1500);
+                } else {
+                    const err = await res.json();
+                    btn.textContent = `❌ ${err.error || 'Failed'}`;
+                    btn.disabled = false;
+                }
+            } catch {
+                btn.textContent = '❌ Network error';
+                btn.disabled = false;
             }
         }
 
