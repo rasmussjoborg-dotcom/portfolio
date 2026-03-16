@@ -453,6 +453,101 @@
             margin-bottom: 1.25rem;
         }
 
+        /* ── Discovery Brief ── */
+        .brief-section {
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .brief-toggle {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            color: var(--color-text-muted);
+            background: rgba(255,255,255,0.02);
+            list-style: none;
+            user-select: none;
+        }
+        .brief-toggle::-webkit-details-marker { display: none; }
+        .brief-toggle::before { content: '▸ '; opacity: 0.5; }
+        details[open] > .brief-toggle::before { content: '▾ '; }
+        .brief-body {
+            padding: 0.75rem 1rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .brief-vision {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+        .brief-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+        .brief-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+            margin-bottom: 0.25rem;
+        }
+        .brief-value {
+            font-size: 0.82rem;
+            color: var(--color-text);
+            line-height: 1.4;
+        }
+        .brief-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+        }
+        .brief-chip {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+        }
+        .brief-chip.affinity {
+            background: rgba(168,85,247,0.1);
+            border-color: rgba(168,85,247,0.2);
+            color: #c084fc;
+        }
+        .brief-palette {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .brief-tone {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+        .brief-mvp {
+            font-size: 0.82rem;
+            color: var(--color-text-muted);
+            padding-left: 1.2rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
         .wip-meta {
             font-family: var(--font-mono);
             font-size: 0.7rem;
@@ -1112,6 +1207,50 @@
                                 <span class="wip-status ${p.status}">${p.status}</span>
                             </div>
                             ${desc ? `<div class="wip-desc">${esc(desc)}</div>` : ''}
+                            ${(() => {
+                                if (!p.discovery_brief_json) return '';
+                                try {
+                                    const b = JSON.parse(p.discovery_brief_json);
+                                    return `
+                                    <details class="brief-section" id="brief-${p.slug}">
+                                        <summary class="brief-toggle">📋 Discovery Brief</summary>
+                                        <div class="brief-body">
+                                            <div class="brief-vision">${esc(b.vision || '')}</div>
+                                            <div class="brief-row">
+                                                <div class="brief-col">
+                                                    <div class="brief-label">🎯 Target</div>
+                                                    <div class="brief-value">${esc(b.target?.persona || '')}</div>
+                                                </div>
+                                                <div class="brief-col">
+                                                    <div class="brief-label">💡 Gap</div>
+                                                    <div class="brief-value">${esc(b.gap || '')}</div>
+                                                </div>
+                                            </div>
+                                            ${b.competitors?.length ? `
+                                            <div class="brief-label">🏪 Competitors</div>
+                                            <div class="brief-chips">
+                                                ${b.competitors.map(c => `<span class="brief-chip">${esc(c.name)}${c.rating ? ` (${esc(c.rating)})` : ''}</span>`).join('')}
+                                            </div>` : ''}
+                                            ${b.audienceAffinities?.length ? `
+                                            <div class="brief-label">👥 Audience Affinities</div>
+                                            <div class="brief-chips">
+                                                ${b.audienceAffinities.map(a => `<span class="brief-chip affinity">${esc(a)}</span>`).join('')}
+                                            </div>` : ''}
+                                            ${b.brand?.palette?.length ? `
+                                            <div class="brief-label">🎨 Brand</div>
+                                            <div class="brief-palette">
+                                                ${b.brand.palette.map(c => `<div class="swatch" style="background:${c}" title="${c}"></div>`).join('')}
+                                                <span class="brief-tone">${esc(b.brand.tone || '')}</span>
+                                            </div>` : ''}
+                                            ${b.mvpFeatures?.length ? `
+                                            <div class="brief-label">📦 MVP</div>
+                                            <ul class="brief-mvp">
+                                                ${b.mvpFeatures.map(f => `<li>${esc(f)}</li>`).join('')}
+                                            </ul>` : ''}
+                                        </div>
+                                    </details>`;
+                                } catch { return ''; }
+                            })()}
                             <div class="wip-meta">
                                 <span>Night ${p.night_number}</span>
                                 <span>${date}</span>
