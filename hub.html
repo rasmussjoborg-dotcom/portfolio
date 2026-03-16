@@ -393,10 +393,6 @@
             border-radius: var(--radius-lg);
             padding: 2rem;
             margin-bottom: 2rem;
-            display: grid;
-            grid-template-columns: 1fr 280px;
-            gap: 2.5rem;
-            align-items: start;
             transition: all 0.3s ease;
         }
 
@@ -1065,18 +1061,6 @@
                                     </button>
                                 </div>
                             </div>
-                            ${p.vercel_url ? `
-                            <div class="phone-wrap">
-                                <div class="var-tabs" id="tabs-${p.slug}">
-                                    <button class="var-tab ${activeVar === 'v1' ? 'active' : ''}" onclick="switchVar('${p.slug}', 'v1', '${p.vercel_url}')">V1</button>
-                                    <button class="var-tab ${activeVar === 'v2' ? 'active' : ''}" onclick="switchVar('${p.slug}', 'v2', '${p.vercel_url}')">V2</button>
-                                    <button class="var-tab ${activeVar === 'v3' ? 'active' : ''}" onclick="switchVar('${p.slug}', 'v3', '${p.vercel_url}')">V3</button>
-                                </div>
-                                <div class="phone-frame">
-                                    <div class="phone-notch"></div>
-                                    <iframe class="phone-iframe" id="frame-${p.slug}" src="${p.vercel_url}/${activeVar}" loading="lazy"></iframe>
-                                </div>
-                            </div>` : ''}
                         </div>`;
                     }
                 }
