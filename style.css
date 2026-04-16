@@ -806,6 +806,7 @@ section {
     background: #fff;
     overflow: hidden;
     border-top: 1px solid #fff;
+    margin-bottom: -1px;
 }
 
 .browser-header-img {
