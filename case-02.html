@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>RS — Qapital</title>
+    <meta name="description" content="Private case study page for Qapital by Rasmus Sjöborg.">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <link rel="canonical" href="https://portfolio-rsjo-projects.vercel.app/field-notes/case-02">
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>◌</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=25">
+
+    <style>
+        body {
+            min-height: 100vh;
+        }
+
+        .site-background {
+            height: 120vh;
+            mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+        }
+
+        .site-background::before {
+            background:
+                radial-gradient(circle at 22% 18%, rgba(253, 254, 189, 0.08), transparent 30%),
+                radial-gradient(circle at 82% 24%, rgba(255, 255, 255, 0.07), transparent 26%);
+        }
+
+        .site-background::after {
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.06), transparent 38%);
+        }
+
+        .case-page {
+            position: relative;
+            z-index: 1;
+        }
+
+        .case-hero {
+            min-height: auto;
+            align-items: flex-start;
+            text-align: left;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding-top: 7rem;
+            gap: 1rem;
+        }
+
+        .case-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .case-nav:hover {
+            color: var(--color-accent);
+        }
+
+        .case-nav::before {
+            content: "<-";
+        }
+
+        .case-kicker {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+        }
+
+        .case-deck {
+            max-width: 720px;
+            font-size: 1.06rem;
+            color: var(--color-text-muted);
+        }
+
+        .case-stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+            width: 100%;
+            margin-top: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .case-stat {
+            padding: 1rem 1.1rem;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(10, 10, 10, 0.7);
+        }
+
+        .case-stat-label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.64rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: 0.35rem;
+        }
+
+        .case-stat-value {
+            color: var(--color-text-main);
+            font-size: 0.94rem;
+        }
+
+        .image-story {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 var(--space-buffer) var(--space-lg);
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .image-frame {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)),
+                rgba(10, 10, 10, 0.92);
+            min-height: 420px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .image-frame::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(253, 254, 189, 0.06), transparent 35%),
+                radial-gradient(circle at 70% 20%, rgba(120, 160, 255, 0.09), transparent 28%);
+            pointer-events: none;
+        }
+
+        .frame-label,
+        .frame-note {
+            position: relative;
+            z-index: 1;
+        }
+
+        .frame-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+        }
+
+        .frame-media {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            margin: 1.5rem 0;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)),
+                rgba(5, 5, 5, 0.95);
+        }
+
+        .frame-media img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .ui-contain {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: #111;
+        }
+
+        .ui-contain img {
+            object-fit: contain;
+        }
+
+        .frame-note {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            max-width: 58ch;
+        }
+
+        .image-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .image-triptych {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 960px) {
+            .case-stats,
+            .image-pair,
+            .image-triptych {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="noise-overlay"></div>
+    <div class="site-background"></div>
+
+    <main class="case-page">
+        <section class="hero-section case-hero">
+            <a class="case-nav" href="/field-notes" data-file-href="field-notes.html"
+                data-deploy-href="/field-notes">Back to selected cases</a>
+            <span class="case-kicker">Case 02</span>
+            <h1 class="hero-title">Qapital</h1>
+            <p class="hero-subtitle case-deck">
+                Qapital is a comprehensive money management app built on behavioral economics. It empowers users to take control of their finances by automating saving, investing, and budgeting. By connecting daily habits to long-term financial goals, the platform transforms abstract financial concepts into actionable, everyday behaviors.
+            </p>
+
+            <div class="case-stats">
+                <div class="case-stat">
+                    <span class="case-stat-label">Client</span>
+                    <span class="case-stat-value">Qapital</span>
+                </div>
+                <div class="case-stat">
+                    <span class="case-stat-label">Role</span>
+                    <span class="case-stat-value">Product Designer</span>
+                </div>
+                <div class="case-stat">
+                    <span class="case-stat-label">Scope</span>
+                    <span class="case-stat-value">Product design / UX</span>
+                </div>
+                <div class="case-stat">
+                    <span class="case-stat-label">Context</span>
+                    <span class="case-stat-value">Fintech / Personal Finance</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="image-story">
+
+            <!-- Lifestyle Opener -->
+            <div class="image-pair">
+                <div class="image-frame">
+                    <span class="frame-label">Payday Divvy</span>
+                    <div class="frame-media">
+                        <img src="images/field-notes-img/qapital/Frame_39642_31616180c5.png" alt="Phone showing Payday Divvy funding screen on orange fabric">
+                    </div>
+                    <p class="frame-note">The Funding tab gives users full control over how each paycheck is split. A visual bar breaks down spending vs. saving allocations across goals like Emergency Fund and Down Payment—turning abstract budgeting into a tangible, adjustable interface.</p>
+                </div>
+
+                <div class="image-frame">
+                    <span class="frame-label">In Context</span>
+                    <div class="frame-media">
+                        <img src="images/field-notes-img/qapital/image-d121a0de-c4cc-42c5-95f4-bd3ba8fd9fe4.webp" alt="Hand holding phone showing Choose a Goal on blue background">
+                    </div>
+                    <p class="frame-note">The goal picker surfaces personalized templates—New Ride, Emergency Fund, Vacation—organized by relevance. Users start saving in under 30 seconds by tapping a visual card that resonates with their ambition.</p>
+                </div>
+            </div>
+
+            <!-- Onboarding: Value Props -->
+            <div class="image-frame tall">
+                <span class="frame-label">01 — First Impressions</span>
+                <div class="frame-media ui-contain">
+                    <img src="images/field-notes-img/qapital/1.png" alt="Three onboarding splash screens: Start with a goal, Save and invest, Team up">
+                </div>
+                <p class="frame-note">The onboarding sequence leads with three distinct value propositions—goal-based saving, automated investing, and shared finances—each on a color-coded screen. This immediately communicates breadth while keeping the activation CTA persistent and prominent.</p>
+            </div>
+
+            <!-- Onboarding: Goal Setup Flow -->
+            <div class="image-frame tall">
+                <span class="frame-label">02 — Goal Definition</span>
+                <div class="frame-media ui-contain">
+                    <img src="images/field-notes-img/qapital/2.png" alt="Annotated flow: goal setup, intent categorization, template selection">
+                </div>
+                <p class="frame-note">The experience is sliced into digestible steps: a narrative introduction, intent categorization ("Do something", "Buy something", "Pay off debt"), and a visually rich template gallery. Design callouts highlight how each screen reduces cognitive load while maintaining forward momentum.</p>
+            </div>
+
+            <div class="image-frame tall">
+                <span class="frame-label">03 — Rules &amp; Automation</span>
+                <div class="frame-media ui-contain">
+                    <img src="images/field-notes-img/qapital/3.png" alt="Annotated flow: goal amount, progress stepper, rule selection">
+                </div>
+                <p class="frame-note">After defining a goal, users set a target amount and achievement date, then select automated saving rules—52 Week Rule, Payday percentage—that turn passive intent into active, recurring transfers. The progress stepper provides constant verification of where users are in the setup.</p>
+            </div>
+
+            <div class="image-frame tall">
+                <span class="frame-label">04 — Account Linking</span>
+                <div class="frame-media ui-contain">
+                    <img src="images/field-notes-img/qapital/4.png" alt="Flow: link checking account via Plaid, bank selection, confirmation">
+                </div>
+                <p class="frame-note">The critical friction point of connecting a funding source is handled through Plaid integration. The flow moves from a clear prompt ("Next, link a checking account") through bank selection to an immediate confirmation state—"Great, your checking account is connected"—with the goal card visible throughout for continuity.</p>
+            </div>
+
+            <div class="image-frame tall">
+                <span class="frame-label">05 — Personalization &amp; Plan</span>
+                <div class="frame-media ui-contain">
+                    <img src="images/field-notes-img/qapital/5.png" alt="Post-activation: personalization questions, partner savings, subscription tiers">
+                </div>
+                <p class="frame-note">Post-activation, a narrative overlay transitions users into deeper personalization: "What's important to you?", partner savings options, and a tiered subscription picker (Basic, Complete, Premier). Each step uses progress indicators and playful illustrations to maintain engagement through monetization.</p>
+            </div>
+
+            <!-- Feature Details -->
+            <div class="image-pair">
+                <div class="image-frame">
+                    <span class="frame-label">Weekly Insights</span>
+                    <div class="frame-media ui-contain">
+                        <img src="images/field-notes-img/qapital/IA_Goals_7cefa13aa3.png" alt="Weekly insight card showing balance increase with 3D money illustration">
+                    </div>
+                    <p class="frame-note">Push-style insight cards celebrate progress: "Your Qapital balance increased by $125." Paired with 3D cash illustrations and goal progress bars, these moments reinforce positive behavior and keep users returning to check their momentum.</p>
+                </div>
+
+                <div class="image-frame">
+                    <span class="frame-label">Saving Rules</span>
+                    <div class="frame-media ui-contain">
+                        <img src="images/field-notes-img/qapital/IA_Rules_bf26537935-1.png" alt="Three rule cards: Payday, Set and Forget, Guilty Pleasure">
+                    </div>
+                    <p class="frame-note">Qapital's signature Rules—Payday, Set &amp; Forget, Guilty Pleasure—each use distinctive icons and plain-language descriptions. The card-based layout makes it effortless to browse and stack multiple rules, turning the savings engine into something playful and personal.</p>
+                </div>
+            </div>
+
+            <!-- Lifestyle Closer -->
+            <div class="image-pair">
+                <div class="image-frame">
+                    <span class="frame-label">Goal Selection</span>
+                    <div class="frame-media">
+                        <img src="images/field-notes-img/qapital/image-7a85d215-09f4-4538-b9f7-a3220636b36c.webp" alt="Hands holding phone browsing goal templates with warm blurred background">
+                    </div>
+                    <p class="frame-note">Highly visual goal templates—each tagged as Popular or Recommended—use aspirational imagery to connect financial planning with emotional motivation. The interface transforms abstract dollar amounts into concrete, desirable outcomes.</p>
+                </div>
+
+                <div class="image-frame">
+                    <span class="frame-label">Qapital in the Wild</span>
+                    <div class="frame-media">
+                        <img src="images/field-notes-img/qapital/qapital_press-photo-02.webp" alt="Hand holding phone at café with Qapital card and credit card bill">
+                    </div>
+                    <p class="frame-note">The product lives at the intersection of everyday moments and financial intention. A café table, a Visa card, and the "Build your goal list" screen—saving starts wherever the user happens to be.</p>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        if (window.location.protocol === "file:") {
+            document.querySelectorAll("[data-file-href]").forEach((link) => {
+                link.setAttribute("href", link.getAttribute("data-file-href"));
+            });
+        }
+    </script>
+</body>
+
+</html>

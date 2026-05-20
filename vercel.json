@@ -11,6 +11,118 @@
         {
             "source": "/hub",
             "destination": "/hub.html"
+        },
+        {
+            "source": "/field-notes",
+            "destination": "/field-notes.html"
+        },
+        {
+            "source": "/field-notes/case-01",
+            "destination": "/case-01.html"
+        },
+        {
+            "source": "/field-notes/case-02",
+            "destination": "/case-02.html"
+        },
+        {
+            "source": "/field-notes/case-03",
+            "destination": "/case-04.html"
+        },
+        {
+            "source": "/field-notes/case-04",
+            "destination": "/case-04.html"
+        }
+    ],
+    "headers": [
+        {
+            "source": "/field-notes",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow, noarchive"
+                }
+            ]
+        },
+        {
+            "source": "/field-notes.html",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow, noarchive"
+                }
+            ]
+        },
+        {
+            "source": "/field-notes/case-01",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow, noarchive"
+                }
+            ]
+        },
+        {
+            "source": "/field-notes/case-02",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow, noarchive"
+                }
+            ]
+        },
+        {
+            "source": "/field-notes/case-03",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow, noarchive"
+                }
+            ]
+        },
+        {
+            "source": "/field-notes/case-04",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow, noarchive"
+                }
+            ]
+        },
+        {
+            "source": "/case-01.html",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow, noarchive"
+                }
+            ]
+        },
+        {
+            "source": "/case-02.html",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow, noarchive"
+                }
+            ]
+        },
+        {
+            "source": "/case-03.html",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow, noarchive"
+                }
+            ]
+        },
+        {
+            "source": "/case-04.html",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow, noarchive"
+                }
+            ]
         }
     ],
     "redirects": [
